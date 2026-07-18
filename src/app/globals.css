@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #10b981;
+  --color-primary-dark: #059669;
+  --color-primary-light: #34d399;
+  --color-dark: #111827;
+  --color-accent: #f59e0b;
+  --color-accent-light: #fbbf24;
+  --color-background: #f8fafc;
+  --color-card: #ffffff;
+  --color-text: #1f2937;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+
+  --font-sans: "Outfit Variable", "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora Variable", "Sora", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 4px 24px rgba(17, 24, 39, 0.06);
+  --shadow-lift: 0 12px 40px rgba(17, 24, 39, 0.1);
+  --shadow-glow: 0 0 40px rgba(16, 185, 129, 0.2);
+
+  --radius-card: 1.25rem;
+  --radius-pill: 9999px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--color-dark);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-blob {
+  animation: blob 12s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(17, 24, 39, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Standalone social floats — each button is its own surface */
+.social-float {
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 8px 24px color-mix(in srgb, var(--social-color, #10b981) 35%, transparent),
+    0 2px 8px rgba(17, 24, 39, 0.12);
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+
+.social-float:hover,
+.social-float:focus-visible {
+  box-shadow:
+    0 14px 32px color-mix(in srgb, var(--social-color, #10b981) 45%, transparent),
+    0 4px 12px rgba(17, 24, 39, 0.16);
+}
+
+.social-float:focus-visible {
+  outline: 2px solid var(--color-dark);
+  outline-offset: 3px;
+}
+
+@keyframes portfolio-shine {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(160%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* One-shot shine only — never infinite (avoids continuous flashing) */
+.portfolio-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+  animation: portfolio-shine 1.2s ease-out 0.4s 1 both;
+  pointer-events: none;
+}
+
+.logo-root {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee,
+  .animate-float,
+  .animate-blob,
+  .animate-gradient,
+  .portfolio-shine::after {
+    animation: none !important;
+  }
+
+  .logo-root {
+    will-change: auto;
+  }
+}
+
+/* Hide horizontal scrollbar on filter chips but keep scroll */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
