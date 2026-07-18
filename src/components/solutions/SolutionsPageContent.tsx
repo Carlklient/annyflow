@@ -52,7 +52,7 @@ export function SolutionsPageContent() {
                     </p>
                     <div className="mt-6 sm:mt-8">
                       <Button href="/contact" className="w-full sm:w-auto">
-                        Book Consultation
+                        Book free consultation
                       </Button>
                     </div>
                   </div>

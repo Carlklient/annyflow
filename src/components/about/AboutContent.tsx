@@ -171,11 +171,11 @@ export function AboutContent() {
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Button href="/contact" size="lg">
-                Book Consultation
+                Book free consultation
                 <ArrowRight className="size-4" />
               </Button>
               <Button href="/portfolio" variant="secondary" size="lg" className="border-0">
-                View Portfolio
+                See real projects
               </Button>
             </div>
           </div>

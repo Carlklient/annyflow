@@ -796,3 +796,27 @@ export const FAQ_ITEMS = [
       "We build dialer stacks with call monitoring, recording where applicable, reporting, and operational controls so your teams stay accountable and measurable.",
   },
 ];
+
+export const TESTIMONIALS = [
+  {
+    name: "Daniel K.",
+    role: "Operations Manager",
+    industry: "Professional services",
+    quote:
+      "AnnyFlow replaced our patchwork of spreadsheets and manual handoffs with a clean automation stack. We finally know where every lead and ticket sits.",
+  },
+  {
+    name: "Maya R.",
+    role: "Head of Sales Ops",
+    industry: "Outbound sales team",
+    quote:
+      "Our dialer and CRM finally talk to each other. Agents spend time selling instead of hunting for context between tools.",
+  },
+  {
+    name: "James O.",
+    role: "IT Lead",
+    industry: "Multi-site business",
+    quote:
+      "The phone system rollout was calm and structured—queues, IVR, and CRM sync worked on day one without disrupting the team.",
+  },
+];

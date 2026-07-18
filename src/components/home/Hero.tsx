@@ -64,11 +64,11 @@ export function Hero() {
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             <Button href="/contact" size="lg" className="w-full sm:w-auto">
-              Book Consultation
+              Book free consultation
               <ArrowRight className="size-4" />
             </Button>
             <Button href="/portfolio" variant="secondary" size="lg" className="w-full sm:w-auto">
-              View Portfolio
+              See real projects
             </Button>
           </motion.div>
 

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
@@ -54,17 +56,27 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} — Business Automation & Calling Infrastructure`,
     description: SITE.description,
-    images: [{ url: "/brand/logo-full.png", width: 1344, height: 1539, alt: "AnnyFlow" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} — Business Automation & Calling Infrastructure`,
     description: SITE.description,
-    images: ["/brand/logo-full.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
+  alternates: {
+    canonical: SITE.url,
   },
 };
 
@@ -80,10 +92,15 @@ export default function RootLayout({
         <ScrollToTop />
         <SocialRail />
         <Header />
-        <main id="main" className="min-w-0 overflow-x-clip pb-[env(safe-area-inset-bottom)] md:pr-4 lg:pr-8">
+        <main
+          id="main"
+          className="min-w-0 overflow-x-clip pb-[env(safe-area-inset-bottom)] md:pr-4 lg:pr-8"
+        >
           {children}
         </main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -155,11 +155,15 @@ function ImageLightbox({
                   className="absolute inset-0 origin-center will-change-transform"
                   style={{ transform: `scale(${zoom})` }}
                 >
-                  <img
+                  <Image
                     src={src}
                     alt={title}
-                    className="h-full w-full object-contain p-2"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 90vw"
+                    quality={85}
+                    className="object-contain p-2"
                     draggable={false}
+                    priority
                   />
                 </div>
               </div>
@@ -208,8 +212,9 @@ function ScreenshotVisual({ project }: { project: PortfolioItem }) {
             src={src}
             alt={`${project.title} preview`}
             fill
-            sizes="(max-width: 768px) 100vw, 40vw"
-            quality={90}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={75}
+            loading="lazy"
             className={cn(
               "contrast-[1.05] saturate-[1.06]",
               isDiagram ? "object-contain bg-white p-1.5" : "object-cover object-top"
