@@ -89,6 +89,16 @@ body {
   animation: marquee 40s linear infinite;
 }
 
+/* Homepage portfolio train — medium pace, pauses on hover */
+.animate-portfolio-train {
+  animation: marquee 36s linear infinite;
+  will-change: transform;
+}
+
+.portfolio-train:hover .animate-portfolio-train {
+  animation-play-state: paused;
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -188,6 +198,7 @@ body {
   }
 
   .animate-marquee,
+  .animate-portfolio-train,
   .animate-float,
   .animate-blob,
   .animate-gradient,

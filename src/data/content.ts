@@ -771,6 +771,11 @@ export const FEATURED_PORTFOLIO = PORTFOLIO.filter((p) =>
     "business-workflow-automation",
     "sales-pipeline-automation",
     "ai-customer-support-automation",
+    "enterprise-3cx-deployment",
+    "vicidial-sales-infrastructure",
+    "healthcare-appointment-automation",
+    "predictive-dialing-platform",
+    "cloud-pbx-infrastructure",
   ].includes(p.id)
 );
 
