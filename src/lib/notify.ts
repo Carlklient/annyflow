@@ -133,14 +133,49 @@ async function notifyDiscord(payload: InquiryPayload): Promise<void> {
   });
 }
 
-/** Server-side delivery: Resend → Web3Forms, plus optional chat alerts. */
+async function sendViaFormSubmit(payload: InquiryPayload): Promise<NotifyResult> {
+  const to = SITE.email;
+  const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(to)}`;
+
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      name: payload.name,
+      email: payload.email,
+      company: payload.company || "—",
+      interest: interestLabel(payload.interest),
+      message: payload.message,
+      _subject: `AnnyFlow inquiry from ${payload.name}`,
+      _template: "table",
+      _captcha: "false",
+    }),
+  });
+
+  if (!res.ok) {
+    return { email: false, provider: "formsubmit", error: "FormSubmit failed." };
+  }
+
+  const data = (await res.json().catch(() => ({}))) as { success?: string | boolean };
+  const ok = data.success === "true" || data.success === true;
+  return {
+    email: ok,
+    provider: "formsubmit",
+    error: ok ? undefined : "FormSubmit rejected the submission.",
+  };
+}
+
+/** Server-side delivery: Resend → Web3Forms → FormSubmit, plus optional chat alerts. */
 export async function notifyOwner(payload: InquiryPayload): Promise<NotifyResult> {
   let result: NotifyResult = {
     email: false,
     error: "No server email provider configured or reachable.",
   };
 
-  for (const send of [sendViaResend, sendViaWeb3Forms]) {
+  for (const send of [sendViaResend, sendViaWeb3Forms, sendViaFormSubmit]) {
     try {
       const next = await send(payload);
       if (next.email) {

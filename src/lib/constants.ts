@@ -124,6 +124,10 @@ export const FOOTER_LINKS = {
     { href: "/solutions#business-phone-systems", label: "Business Phone Systems" },
     { href: "/solutions#outbound-calling", label: "Outbound Calling" },
   ],
+  legal: [
+    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/terms", label: "Terms of Use" },
+  ],
 } as const;
 
 const INTEREST_LABEL: Record<string, string> = {

@@ -76,7 +76,16 @@ export function Footer() {
             © {year} {SITE.name}. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4">
-            {CONTACT_CHANNELS.map((c) =>
+            {FOOTER_LINKS.legal.map((link) => (
+              <SmartLink
+                key={link.href}
+                href={link.href}
+                className="text-sm text-white/40 transition-colors hover:text-primary"
+              >
+                {link.label}
+              </SmartLink>
+            ))}
+            {CONTACT_CHANNELS.filter((c) => c.id !== "email").map((c) =>
               c.copyValue ? (
                 <button
                   key={c.id}
@@ -97,8 +106,8 @@ export function Footer() {
                 <a
                   key={c.id}
                   href={c.href}
-                  target={c.id === "email" ? undefined : "_blank"}
-                  rel={c.id === "email" ? undefined : "noopener noreferrer"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm text-white/40 transition-colors hover:text-primary"
                 >
                   {c.label}
