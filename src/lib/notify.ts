@@ -83,16 +83,78 @@ async function sendViaResend(payload: InquiryPayload): Promise<NotifyResult> {
   return { email: true, provider: "resend" };
 }
 
-/** Server-side delivery: Resend → Web3Forms. */
+async function notifyTelegram(payload: InquiryPayload): Promise<void> {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN?.trim();
+  const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+  if (!botToken || !chatId) return;
+
+  const text = [
+    "🆕 AnnyFlow inquiry",
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    `Company: ${payload.company || "—"}`,
+    `Interest: ${interestLabel(payload.interest)}`,
+    "",
+    payload.message,
+  ].join("\n");
+
+  await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text,
+      disable_web_page_preview: true,
+    }),
+  });
+}
+
+async function notifyDiscord(payload: InquiryPayload): Promise<void> {
+  const webhook = process.env.DISCORD_WEBHOOK_URL?.trim();
+  if (!webhook) return;
+
+  await fetch(webhook, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content: `**New AnnyFlow inquiry** from **${payload.name}** (${payload.email})`,
+      embeds: [
+        {
+          title: interestLabel(payload.interest),
+          description: payload.message.slice(0, 1800),
+          color: 0x10b981,
+          fields: [
+            { name: "Company", value: payload.company || "—", inline: true },
+            { name: "Email", value: payload.email, inline: true },
+          ],
+        },
+      ],
+    }),
+  });
+}
+
+/** Server-side delivery: Resend → Web3Forms, plus optional chat alerts. */
 export async function notifyOwner(payload: InquiryPayload): Promise<NotifyResult> {
+  let result: NotifyResult = {
+    email: false,
+    error: "No server email provider configured or reachable.",
+  };
+
   for (const send of [sendViaResend, sendViaWeb3Forms]) {
     try {
-      const result = await send(payload);
-      if (result.email) return result;
+      const next = await send(payload);
+      if (next.email) {
+        result = next;
+        break;
+      }
+      result = next;
     } catch {
       /* try next */
     }
   }
 
-  return { email: false, error: "No server email provider configured or reachable." };
+  // Fire-and-forget side channel alerts (do not block email success)
+  void Promise.allSettled([notifyTelegram(payload), notifyDiscord(payload)]);
+
+  return result;
 }
