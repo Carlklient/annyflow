@@ -14,7 +14,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Logo variant="dark" size="lg" animated={false} />
+            <Logo variant="dark" size="lg" animated />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               {SITE.tagline}. Enterprise systems that feel effortless.
             </p>

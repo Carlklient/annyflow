@@ -178,9 +178,20 @@ export function Logo({
 
   const [hovering, setHovering] = useState(false);
   const [entranceKey, setEntranceKey] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    if (!animated) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = () => setReduceMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const live = animated && !reduceMotion;
+
+  useEffect(() => {
+    if (!live) return;
     let wasAway = false;
 
     const onScroll = () => {
@@ -194,32 +205,32 @@ export function Logo({
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [animated]);
+  }, [live]);
 
   const inner = (
     <motion.span
       key={entranceKey}
       className={cn(
         "logo-root relative inline-flex items-center justify-center transition-transform duration-300",
-        animated && "hover:scale-105",
+        live && "hover:scale-105",
         className
       )}
-      style={{ width: w, height: h, willChange: "transform, opacity" }}
-      initial={animated ? { opacity: 0, y: 10 } : false}
-      animate={animated ? { opacity: 1, y: 0 } : undefined}
+      style={{ width: w, height: h, willChange: live ? "transform, opacity" : "auto" }}
+      initial={live ? { opacity: 0, y: 10, scale: 0.94 } : false}
+      animate={live ? { opacity: 1, y: 0, scale: 1 } : undefined}
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      onHoverStart={() => animated && setHovering(true)}
+      onHoverStart={() => live && setHovering(true)}
       onHoverEnd={() => setHovering(false)}
     >
       <motion.span
         className="relative block transition-[width,height] duration-300 ease-out"
         style={{ width: w, height: h }}
-        animate={animated ? { y: [0, -2.5, 0] } : undefined}
+        animate={live ? { y: [0, -3, 0] } : undefined}
         transition={
-          animated ? { duration: 6.5, repeat: Infinity, ease: "easeInOut" } : undefined
+          live ? { duration: 5.5, repeat: Infinity, ease: "easeInOut" } : undefined
         }
       >
-        {animated && <GlowingOrb hovering={hovering} gradId={gradId} />}
+        {live && <GlowingOrb hovering={hovering} gradId={gradId} />}
 
         <span className="relative z-[2] block h-full w-full drop-shadow-[0_0_12px_rgba(16,185,129,0.25)]">
           <Image
@@ -233,21 +244,21 @@ export function Logo({
           />
         </span>
 
-        {animated && (
+        {live && (
           <motion.span
             aria-hidden
             className="pointer-events-none absolute inset-0 z-[3] overflow-hidden rounded-2xl"
           >
             <motion.span
-              className="absolute inset-y-[-12%] w-[26%] bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"
+              className="absolute inset-y-[-12%] w-[26%] bg-gradient-to-r from-transparent via-white/45 to-transparent skew-x-12"
               animate={{
                 left: ["-40%", "120%"],
-                opacity: [0, 0.7, 0],
+                opacity: [0, 0.75, 0],
               }}
               transition={{
-                duration: 1.5,
+                duration: 1.4,
                 repeat: Infinity,
-                repeatDelay: 6.5,
+                repeatDelay: 4.5,
                 ease: [0.22, 1, 0.36, 1],
               }}
               style={{ willChange: "transform, opacity" }}
@@ -277,17 +288,28 @@ export function LogoMark({
   animated?: boolean;
 }) {
   const [hovering, setHovering] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const gradId = `mark-orb-${useId().replace(/:/g, "")}`;
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = () => setReduceMotion(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const live = animated && !reduceMotion;
 
   return (
     <motion.span
       className={cn("relative inline-flex items-center justify-center", className)}
-      style={{ width: size, height: size, willChange: "transform" }}
-      animate={animated ? { y: [0, -2.5, 0] } : undefined}
-      transition={animated ? { duration: 5.8, repeat: Infinity, ease: "easeInOut" } : undefined}
-      onHoverStart={() => animated && setHovering(true)}
+      style={{ width: size, height: size, willChange: live ? "transform" : "auto" }}
+      animate={live ? { y: [0, -2.5, 0] } : undefined}
+      transition={live ? { duration: 5.2, repeat: Infinity, ease: "easeInOut" } : undefined}
+      onHoverStart={() => live && setHovering(true)}
       onHoverEnd={() => setHovering(false)}
-      whileHover={animated ? { scale: 1.06 } : undefined}
+      whileHover={live ? { scale: 1.08 } : undefined}
     >
       {/* Orb bloom */}
       <motion.span
@@ -328,7 +350,7 @@ export function LogoMark({
         />
       </span>
 
-      {animated && (
+      {live && (
         <motion.span
           aria-hidden
           className="pointer-events-none absolute inset-[-16%]"

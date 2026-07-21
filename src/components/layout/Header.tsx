@@ -49,7 +49,7 @@ export function Header() {
           scrolled ? "h-14 sm:h-16" : "h-16 sm:h-[4.75rem]"
         )}
       >
-        <Logo variant="light" size="md" scrolled={scrolled} priority animated={false} />
+        <Logo variant="light" size="md" scrolled={scrolled} priority animated />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {NAV_LINKS.map((link) => (
