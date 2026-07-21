@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { CONTACT_CHANNELS } from "@/lib/constants";
+import { CONTACT_CHANNELS, SITE } from "@/lib/constants";
 
 export function CTASection() {
   const whatsapp = CONTACT_CHANNELS.find((c) => c.id === "whatsapp");
+  const bookingUrl = SITE.bookingUrl;
 
   return (
     <section className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
@@ -32,10 +33,17 @@ export function CTASection() {
             automation, phone systems, or outbound infrastructure. No obligation.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href="/contact" size="lg">
-              Book Consultation
-              <ArrowRight className="size-4" />
-            </Button>
+            {bookingUrl ? (
+              <Button href={bookingUrl} external size="lg">
+                Book a free call
+                <ArrowRight className="size-4" />
+              </Button>
+            ) : (
+              <Button href="/contact" size="lg">
+                Book Consultation
+                <ArrowRight className="size-4" />
+              </Button>
+            )}
             {whatsapp ? (
               <Button href={whatsapp.href} external variant="secondary" size="lg" className="border-0">
                 <MessageCircle className="size-4" />

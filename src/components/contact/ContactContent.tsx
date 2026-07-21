@@ -2,7 +2,7 @@
 
 import { type FormEvent, type ReactNode, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, CheckCircle2, MapPin, Send, Loader2, Mail } from "lucide-react";
+import { ChevronDown, CheckCircle2, MapPin, Send, Loader2, Mail, Calendar, MessageCircle } from "lucide-react";
 import { FAQ_ITEMS } from "@/data/content";
 import { CONTACT_CHANNELS, SITE } from "@/lib/constants";
 import {
@@ -96,9 +96,19 @@ export function ContactContent() {
       return;
     }
 
+    // Fire Telegram/Discord alerts even when email was sent from the browser
+    void fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...payload, alertsOnly: true }),
+    }).catch(() => undefined);
+
     setSubmitted(true);
     form.reset();
   };
+
+  const whatsapp = CONTACT_CHANNELS.find((c) => c.id === "whatsapp");
+  const bookingUrl = SITE.bookingUrl;
 
   return (
     <div className="pt-24 pb-24 sm:pt-28 sm:pb-20">
@@ -120,17 +130,47 @@ export function ContactContent() {
                 >
                   <CheckCircle2 className="size-12 text-primary" />
                   <h2 className="mt-4 font-display text-2xl font-semibold text-dark">
-                    Message sent
+                    Message sent — here&apos;s what happens next
                   </h2>
-                  <p className="mt-2 max-w-md text-muted">
-                    Your inquiry was delivered to{" "}
-                    <span className="font-medium text-dark">{SITE.email}</span>.
-                    We&apos;ll reply to the email you entered.
-                  </p>
+                  <ol className="mt-4 max-w-md space-y-2 text-left text-sm text-muted">
+                    <li>
+                      <span className="font-medium text-dark">1.</span> We review your note
+                      (usually within one business day).
+                    </li>
+                    <li>
+                      <span className="font-medium text-dark">2.</span> Prefer a call now? Book a
+                      free discovery slot below.
+                    </li>
+                    <li>
+                      <span className="font-medium text-dark">3.</span> Or chat us instantly on
+                      WhatsApp.
+                    </li>
+                  </ol>
 
                   <div className="mt-6 flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-dark">
                     <Mail className="size-4 text-primary" />
                     <span>Delivered to {SITE.email}</span>
+                  </div>
+
+                  <div className="mt-6 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+                    {bookingUrl ? (
+                      <Button href={bookingUrl} external size="lg" className="w-full sm:w-auto">
+                        <Calendar className="size-4" />
+                        Book a free call
+                      </Button>
+                    ) : null}
+                    {whatsapp ? (
+                      <Button
+                        href={whatsapp.href}
+                        external
+                        variant={bookingUrl ? "secondary" : "primary"}
+                        size="lg"
+                        className="w-full sm:w-auto"
+                      >
+                        <MessageCircle className="size-4" />
+                        Chat on WhatsApp
+                      </Button>
+                    ) : null}
                   </div>
 
                   <Button
@@ -245,6 +285,12 @@ export function ContactContent() {
                 Prefer chat? Reach AnnyBest on any of these.
               </p>
               <ContactPills className="mt-5" />
+              {bookingUrl ? (
+                <Button href={bookingUrl} external className="mt-5 w-full" variant="secondary">
+                  <Calendar className="size-4" />
+                  Book a free discovery call
+                </Button>
+              ) : null}
               <a
                 href={`mailto:${SITE.email}`}
                 className="mt-5 inline-block text-sm font-medium text-primary transition-colors hover:underline"

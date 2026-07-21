@@ -168,6 +168,11 @@ async function sendViaFormSubmit(payload: InquiryPayload): Promise<NotifyResult>
   };
 }
 
+/** Chat alerts only (Telegram / Discord). Safe to call after client-side email delivery. */
+export async function notifyLeadAlerts(payload: InquiryPayload): Promise<void> {
+  await Promise.allSettled([notifyTelegram(payload), notifyDiscord(payload)]);
+}
+
 /** Server-side delivery: Resend → Web3Forms → FormSubmit, plus optional chat alerts. */
 export async function notifyOwner(payload: InquiryPayload): Promise<NotifyResult> {
   let result: NotifyResult = {
@@ -188,8 +193,7 @@ export async function notifyOwner(payload: InquiryPayload): Promise<NotifyResult
     }
   }
 
-  // Fire-and-forget side channel alerts (do not block email success)
-  void Promise.allSettled([notifyTelegram(payload), notifyDiscord(payload)]);
+  await notifyLeadAlerts(payload);
 
   return result;
 }

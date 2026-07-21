@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { SITE } from "@/lib/constants";
-import { notifyOwner } from "@/lib/notify";
+import { notifyLeadAlerts, notifyOwner } from "@/lib/notify";
 
 export async function POST(request: Request) {
   try {
@@ -10,6 +10,7 @@ export async function POST(request: Request) {
     const company = String(body.company || "").trim();
     const interest = String(body.interest || "").trim();
     const message = String(body.message || "").trim();
+    const alertsOnly = Boolean(body.alertsOnly);
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -26,6 +27,13 @@ export async function POST(request: Request) {
     }
 
     const payload = { name, email, company, interest, message };
+
+    // Email already sent from the browser — only fire Telegram/Discord
+    if (alertsOnly) {
+      await notifyLeadAlerts(payload);
+      return NextResponse.json({ ok: true, alerts: true });
+    }
+
     const notified = await notifyOwner(payload);
 
     return NextResponse.json({
