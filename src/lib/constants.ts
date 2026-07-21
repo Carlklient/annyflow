@@ -7,7 +7,15 @@ export const SITE = {
   tagline: "Business Automation · Phone Systems · Outbound Calling",
   description:
     "AnnyFlow builds enterprise-grade business automation, business phone systems, and outbound calling infrastructure for modern companies.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://annyflow.com",
+  url: (() => {
+    const fallback = "https://annyflow.vercel.app";
+    const raw = (process.env.NEXT_PUBLIC_SITE_URL || fallback).trim();
+    try {
+      return new URL(raw).origin;
+    } catch {
+      return fallback;
+    }
+  })(),
   email: process.env.NEXT_PUBLIC_EMAIL || "mercyanny2020@gmail.com",
   /** Digits only, country code included — from https://wa.me/13869659310 */
   whatsappNumber: (process.env.NEXT_PUBLIC_WHATSAPP || "13869659310").replace(
