@@ -307,61 +307,45 @@ export function ContactContent() {
               ) : null}
             </div>
 
-            <div className="overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-soft">
-              <div className="relative bg-gradient-to-br from-background via-white to-primary/10 p-6 sm:p-7">
-                <div className="absolute inset-0 opacity-40" aria-hidden>
-                  <svg className="h-full w-full">
-                    <defs>
-                      <pattern
-                        id="grid"
-                        width="32"
-                        height="32"
-                        patternUnits="userSpaceOnUse"
-                      >
-                        <path
-                          d="M32 0H0V32"
-                          fill="none"
-                          stroke="#E5E7EB"
-                          strokeWidth="1"
-                        />
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-                  </svg>
-                </div>
-
-                <div className="relative z-10">
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                    <Calendar className="size-6" />
-                  </span>
-                  <h2 className="mt-4 font-display text-lg font-semibold text-dark">
-                    Book a discovery call
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    Remote-first with clients worldwide. Pick a 30-minute slot and
-                    we&apos;ll map your automation or calling stack.
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm text-dark">
-                    <li className="flex items-start gap-2">
-                      <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
-                      <span>Online meetings · on-site by request</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
-                      <span>Usually replies within 1 business day</span>
-                    </li>
-                  </ul>
-                  {bookingUrl ? (
-                    <Button href={bookingUrl} external className="mt-5 w-full">
-                      <Calendar className="size-4" />
-                      Choose a time
-                    </Button>
-                  ) : (
-                    <Button href="/contact" className="mt-5 w-full">
-                      Send a message first
-                    </Button>
-                  )}
-                </div>
+            <div className="overflow-hidden rounded-[1.75rem] border border-border bg-white p-6 shadow-soft sm:p-7">
+              <span className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <Calendar className="size-6" />
+              </span>
+              <h2 className="mt-4 font-display text-lg font-semibold text-dark">
+                Book a discovery call
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                We work remote-first with clients worldwide. Choose a time that
+                fits — on-site visits are available on request.
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-dark">
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <span>Online meetings · flexible time zones</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <span>Usually replies within 1 business day</span>
+                </li>
+              </ul>
+              <div className="mt-5 flex flex-col gap-2.5">
+                <a
+                  href={bookingUrl || "https://cal.com/annyflow-e7ey2d/30min"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-white shadow-soft transition-all hover:bg-primary-dark"
+                >
+                  <Calendar className="size-4" />
+                  Book 30 minutes
+                </a>
+                <a
+                  href="https://cal.com/annyflow-e7ey2d/15min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-medium text-dark shadow-soft transition-all hover:border-primary/30"
+                >
+                  Book 15 minutes
+                </a>
               </div>
             </div>
 

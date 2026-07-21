@@ -31,8 +31,11 @@ export const SITE = {
     ""
   ),
   founder: "Annybest",
-  /** Free Cal.com (or Calendly) booking link — e.g. https://cal.com/your-name/15min */
-  bookingUrl: (process.env.NEXT_PUBLIC_BOOKING_URL || "").trim(),
+  /** Free Cal.com booking link */
+  bookingUrl: (
+    process.env.NEXT_PUBLIC_BOOKING_URL ||
+    "https://cal.com/annyflow-e7ey2d/30min"
+  ).trim(),
 } as const;
 
 export const NAV_LINKS = [
