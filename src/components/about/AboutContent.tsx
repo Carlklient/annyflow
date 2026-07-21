@@ -40,7 +40,7 @@ export function AboutContent() {
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-[center_20%]"
+                className="object-cover object-[center_15%]"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent p-6 pt-24">
                 <p className="font-display text-lg font-semibold text-white">Annybest</p>
