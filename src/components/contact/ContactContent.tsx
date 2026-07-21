@@ -308,9 +308,9 @@ export function ContactContent() {
             </div>
 
             <div className="overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-soft">
-              <div className="relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-background via-white to-primary/10">
-                <div className="absolute inset-0 opacity-40">
-                  <svg className="h-full w-full" aria-hidden>
+              <div className="relative bg-gradient-to-br from-background via-white to-primary/10 p-6 sm:p-7">
+                <div className="absolute inset-0 opacity-40" aria-hidden>
+                  <svg className="h-full w-full">
                     <defs>
                       <pattern
                         id="grid"
@@ -329,16 +329,38 @@ export function ContactContent() {
                     <rect width="100%" height="100%" fill="url(#grid)" />
                   </svg>
                 </div>
-                <div className="relative z-10 flex flex-col items-center px-6 text-center">
+
+                <div className="relative z-10">
                   <span className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                    <MapPin className="size-6" />
+                    <Calendar className="size-6" />
                   </span>
-                  <p className="mt-3 font-display text-base font-semibold text-dark">
-                    Remote-first delivery
+                  <h2 className="mt-4 font-display text-lg font-semibold text-dark">
+                    Book a discovery call
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    Remote-first with clients worldwide. Pick a 30-minute slot and
+                    we&apos;ll map your automation or calling stack.
                   </p>
-                  <p className="mt-1 text-sm text-muted">
-                    Global clients · On-site available on request
-                  </p>
+                  <ul className="mt-4 space-y-2 text-sm text-dark">
+                    <li className="flex items-start gap-2">
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <span>Online meetings · on-site by request</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <span>Usually replies within 1 business day</span>
+                    </li>
+                  </ul>
+                  {bookingUrl ? (
+                    <Button href={bookingUrl} external className="mt-5 w-full">
+                      <Calendar className="size-4" />
+                      Choose a time
+                    </Button>
+                  ) : (
+                    <Button href="/contact" className="mt-5 w-full">
+                      Send a message first
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
