@@ -291,7 +291,10 @@ export function HeroIllustration() {
                 }}
               >
                 <motion.div
-                  animate={{ x: card.drift.x, y: card.drift.y }}
+                  animate={{
+                    x: [...card.drift.x],
+                    y: [...card.drift.y],
+                  }}
                   transition={{
                     duration: card.drift.duration,
                     repeat: Infinity,
