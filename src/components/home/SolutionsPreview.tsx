@@ -16,7 +16,7 @@ const ICONS = {
 export function SolutionsPreview() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 prism-mesh opacity-70" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 prism-mesh" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <SectionHeading
@@ -35,8 +35,8 @@ export function SolutionsPreview() {
                   href={solution.href}
                   className={
                     highlight
-                      ? "prism-border prism-sheen group relative flex h-full flex-col rounded-[1.5rem] glass-panel p-7 shadow-lift transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow focus-ring"
-                      : "prism-border prism-border-soft group relative flex h-full flex-col rounded-[1.5rem] glass-panel p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-ring"
+                      ? "prism-border prism-sheen group relative flex h-full flex-col rounded-[1.5rem] p-7 shadow-lift transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow focus-ring"
+                      : "prism-border prism-border-soft group relative flex h-full flex-col rounded-[1.5rem] p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-ring"
                   }
                 >
                   {highlight ? (

@@ -12,7 +12,7 @@ export function HeroIllustration() {
       />
 
       <motion.div
-        className="prism-border prism-sheen relative h-full overflow-hidden rounded-[1.5rem] glass-panel shadow-lift sm:rounded-[1.75rem]"
+        className="prism-border prism-sheen relative h-full overflow-hidden rounded-[1.5rem] shadow-lift sm:rounded-[1.75rem]"
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -160,7 +160,7 @@ export function HeroIllustration() {
 
       {/* Floating chips */}
       <motion.div
-        className="absolute top-2 right-2 rounded-2xl glass-panel prism-border prism-border-soft px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:top-4 sm:right-0 sm:px-3 sm:py-2 sm:text-xs"
+        className="absolute top-2 right-2 rounded-2xl prism-border prism-border-soft px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:top-4 sm:right-0 sm:px-3 sm:py-2 sm:text-xs"
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -168,7 +168,7 @@ export function HeroIllustration() {
         CRM sync active
       </motion.div>
       <motion.div
-        className="absolute bottom-4 left-2 rounded-2xl glass-panel prism-border prism-border-soft px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:bottom-10 sm:left-0 sm:px-3 sm:py-2 sm:text-xs"
+        className="absolute bottom-4 left-2 rounded-2xl prism-border prism-border-soft px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:bottom-10 sm:left-0 sm:px-3 sm:py-2 sm:text-xs"
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >

@@ -51,7 +51,7 @@ function AnimatedStat({
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -4, transition: { duration: 0.25 } }}
-      className="prism-border prism-border-soft prism-sheen group relative overflow-hidden rounded-2xl glass-dark px-5 py-6 text-center sm:px-6 sm:py-7 lg:text-left"
+      className="prism-border-dark prism-sheen group relative overflow-hidden rounded-2xl px-5 py-6 text-center sm:px-6 sm:py-7 lg:text-left"
     >
       <motion.span
         aria-hidden

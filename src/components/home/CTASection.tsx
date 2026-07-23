@@ -16,7 +16,7 @@ export function CTASection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="prism-border prism-sheen relative overflow-hidden rounded-[1.75rem] glass-dark px-8 py-16 text-center sm:px-12 sm:py-20"
+        className="prism-border-dark prism-sheen relative overflow-hidden rounded-[1.75rem] px-8 py-16 text-center sm:px-12 sm:py-20"
       >
         <div className="pointer-events-none absolute inset-0 prism-mesh-dark" aria-hidden />
         <div
