@@ -94,7 +94,7 @@ function AnimatedStat({
 
 export function StatsBar() {
   return (
-    <section className="relative overflow-hidden border-y border-white/10 bg-dark text-white">
+    <section id="stats" className="relative overflow-hidden border-y border-white/10 bg-dark text-white">
       <div className="pointer-events-none absolute inset-0 prism-mesh-dark" aria-hidden />
       <motion.div
         aria-hidden
