@@ -74,8 +74,8 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href="/contact" size="sm">
-            Book Consultation
+          <Button href="/contact" size="sm" variant="dark">
+            Get Started
           </Button>
         </div>
 
