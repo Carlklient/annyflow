@@ -12,7 +12,6 @@ export function Hero() {
 
   return (
     <section className="relative overflow-x-clip bg-white pt-24 sm:pt-28">
-      {/* Copy block */}
       <div className="relative mx-auto flex max-w-3xl flex-col items-center px-5 text-center sm:px-8">
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 10 }}
@@ -58,15 +57,9 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Hero image slot — full-bleed animated map (Pass-On placement) */}
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.85, delay: 0.35, ease: EASE }}
-        className="relative mt-14 w-full sm:mt-16 lg:mt-20"
-      >
+      <div className="relative mt-12 w-full sm:mt-14 lg:mt-16">
         <HeroIllustration />
-      </motion.div>
+      </div>
     </section>
   );
 }
