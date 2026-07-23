@@ -4,171 +4,241 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const NODES = [
-  { t: "Lead", c: "bg-dark" },
-  { t: "CRM", c: "bg-primary" },
-  { t: "PBX", c: "bg-accent" },
-  { t: "Dialer", c: "bg-dark" },
+/** Hub nodes on the operations map — related to AnnyFlow services */
+const HUBS = [
+  { id: "crm", label: "CRM", x: 180, y: 220, tone: "#10B981" },
+  { id: "sheets", label: "Sheets", x: 320, y: 140, tone: "#059669" },
+  { id: "phone", label: "Phone", x: 520, y: 180, tone: "#111827" },
+  { id: "dialer", label: "Dialer", x: 700, y: 250, tone: "#F59E0B" },
+  { id: "ai", label: "AI", x: 420, y: 320, tone: "#10B981" },
+  { id: "ops", label: "Ops", x: 600, y: 380, tone: "#111827" },
 ] as const;
+
+const ROUTES: [string, string][] = [
+  ["crm", "sheets"],
+  ["sheets", "phone"],
+  ["phone", "dialer"],
+  ["crm", "ai"],
+  ["ai", "dialer"],
+  ["phone", "ops"],
+  ["ai", "ops"],
+  ["sheets", "ai"],
+];
+
+function hub(id: string) {
+  return HUBS.find((h) => h.id === id)!;
+}
 
 export function HeroIllustration() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative mx-auto w-full pb-2">
-      <motion.div
-        className="relative overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-lift sm:rounded-[2rem]"
-        initial={reduce ? false : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-      >
-        <div className="flex items-center gap-2 border-b border-border bg-background px-5 py-3.5">
-          <span className="size-2.5 rounded-full bg-[#F87171]" />
-          <span className="size-2.5 rounded-full bg-accent" />
-          <span className="size-2.5 rounded-full bg-primary" />
-          <span className="ml-3 text-[11px] font-medium tracking-wide text-muted">
-            AnnyFlow Control Plane
-          </span>
-          <span className="ml-auto hidden items-center gap-1.5 text-[10px] font-semibold text-primary sm:inline-flex">
-            <span className="size-1.5 rounded-full bg-primary" />
-            Live
+    <div className="relative mx-auto w-full overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-lift sm:rounded-[2rem]">
+      {/* Soft brand wash — emerald only */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(16,185,129,0.08),transparent_50%),radial-gradient(ellipse_at_80%_70%,rgba(245,158,11,0.06),transparent_45%)]"
+        aria-hidden
+      />
+
+      <div className="relative px-3 pb-4 pt-5 sm:px-6 sm:pb-6 sm:pt-6">
+        <div className="mb-3 flex items-center justify-between px-2 sm:mb-4">
+          <p className="text-[11px] font-semibold tracking-wide text-muted uppercase">
+            Live operations map
+          </p>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary">
+            <motion.span
+              className="size-1.5 rounded-full bg-primary"
+              animate={reduce ? undefined : { opacity: [1, 0.35, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+            />
+            Syncing systems
           </span>
         </div>
 
-        <div className="grid gap-4 p-4 sm:grid-cols-12 sm:gap-5 sm:p-6 lg:p-8">
-          <div className="hidden flex-col gap-2 rounded-2xl bg-dark p-4 text-white sm:col-span-3 sm:flex">
-            {["Automations", "Phone", "Outbound", "Reports"].map((item, i) => (
-              <div
-                key={item}
-                className={`rounded-xl px-3 py-2.5 text-xs font-medium ${
-                  i === 0 ? "bg-primary text-white" : "text-white/50"
-                }`}
-              >
-                {item}
-              </div>
-            ))}
-            <div className="mt-auto rounded-xl bg-white/5 p-3">
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                <motion.div
-                  className="h-full rounded-full bg-primary"
-                  animate={reduce ? { width: "78%" } : { width: ["40%", "82%", "60%", "90%"] }}
-                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        <svg
+          viewBox="0 0 880 480"
+          className="h-auto w-full"
+          role="img"
+          aria-label="Animated map of connected business automation, phone, and outbound systems"
+        >
+          <defs>
+            <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="#E5E7EB"
+                strokeWidth="1"
+              />
+            </pattern>
+            <linearGradient id="route-green" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#10B981" stopOpacity="0" />
+              <stop offset="50%" stopColor="#10B981" stopOpacity="1" />
+              <stop offset="100%" stopColor="#10B981" stopOpacity="0" />
+            </linearGradient>
+            <filter id="hub-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Map base */}
+          <rect width="880" height="480" fill="url(#map-grid)" opacity="0.7" />
+
+          {/* Soft continent / territory shapes — abstract, not a real map copy */}
+          <motion.path
+            d="M120 160 C 200 90, 340 80, 420 130 C 500 90, 620 110, 720 160 C 780 210, 760 320, 680 360 C 560 420, 380 400, 260 360 C 160 320, 90 240, 120 160 Z"
+            fill="#ECFDF5"
+            stroke="#A7F3D0"
+            strokeWidth="2"
+            initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: EASE }}
+            style={{ transformOrigin: "440px 240px" }}
+          />
+          <path
+            d="M200 200 C 280 170, 360 190, 400 230 C 360 280, 260 290, 210 250 Z"
+            fill="#D1FAE5"
+            opacity="0.55"
+          />
+          <path
+            d="M520 200 C 600 170, 680 200, 700 250 C 660 300, 560 290, 520 240 Z"
+            fill="#FEF3C7"
+            opacity="0.45"
+          />
+
+          {/* Animated routes between hubs */}
+          {ROUTES.map(([from, to], i) => {
+            const a = hub(from);
+            const b = hub(to);
+            const mx = (a.x + b.x) / 2;
+            const my = (a.y + b.y) / 2 - 24 - (i % 3) * 8;
+            const d = `M${a.x} ${a.y} Q ${mx} ${my} ${b.x} ${b.y}`;
+            return (
+              <g key={`${from}-${to}`}>
+                <path
+                  d={d}
+                  fill="none"
+                  stroke="#D1D5DB"
+                  strokeWidth="2"
+                  strokeDasharray="6 8"
                 />
-              </div>
-              <p className="mt-2 text-[10px] text-white/40">System health</p>
-            </div>
-          </div>
+                <motion.path
+                  d={d}
+                  fill="none"
+                  stroke="url(#route-green)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={
+                    reduce
+                      ? { pathLength: 1, opacity: 0.7 }
+                      : { pathLength: [0, 1], opacity: [0.2, 1, 0.3] }
+                  }
+                  transition={{
+                    duration: 2.8 + (i % 4) * 0.35,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.25,
+                  }}
+                />
+              </g>
+            );
+          })}
 
-          <div className="flex flex-col gap-4 sm:col-span-9">
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { label: "Workflows", value: "128", color: "text-primary" },
-                { label: "Active Lines", value: "42", color: "text-accent" },
-                { label: "Dial Rate", value: "97%", color: "text-dark" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl border border-border bg-background p-3 sm:p-4"
-                >
-                  <p className="text-[10px] font-medium tracking-wide text-muted uppercase">
-                    {stat.label}
-                  </p>
-                  <p className={`mt-1 font-display text-xl font-semibold sm:text-2xl ${stat.color}`}>
-                    {stat.value}
-                  </p>
-                </div>
-              ))}
-            </div>
+          {/* Hub nodes */}
+          {HUBS.map((h, i) => (
+            <g key={h.id}>
+              <motion.circle
+                cx={h.x}
+                cy={h.y}
+                r="22"
+                fill="white"
+                stroke={h.tone}
+                strokeWidth="2.5"
+                initial={reduce ? false : { scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.35 + i * 0.08, duration: 0.45, ease: EASE }}
+                style={{ transformOrigin: `${h.x}px ${h.y}px` }}
+              />
+              <motion.circle
+                cx={h.x}
+                cy={h.y}
+                r="8"
+                fill={h.tone}
+                animate={
+                  reduce
+                    ? undefined
+                    : { scale: [1, 1.2, 1], opacity: [0.85, 1, 0.85] }
+                }
+                transition={{
+                  duration: 2.4 + (i % 3) * 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.15,
+                }}
+                style={{ transformOrigin: `${h.x}px ${h.y}px` }}
+              />
+              <motion.text
+                x={h.x}
+                y={h.y + 40}
+                textAnchor="middle"
+                className="fill-dark"
+                style={{ fontSize: 13, fontWeight: 600, fontFamily: "var(--font-sans)" }}
+                initial={reduce ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 + i * 0.08 }}
+              >
+                {h.label}
+              </motion.text>
+            </g>
+          ))}
 
-            <div className="relative flex-1 overflow-hidden rounded-2xl border border-border bg-background p-4 sm:p-5">
-              <p className="mb-4 text-[10px] font-semibold tracking-wide text-muted uppercase">
-                Live workflow
-              </p>
-              <div className="relative flex items-center justify-between gap-2 px-1 sm:px-4">
-                {NODES.map((node, i) => (
-                  <div key={node.t} className="relative z-10 flex flex-1 flex-col items-center">
-                    <motion.div
-                      className={`flex size-12 items-center justify-center rounded-2xl text-xs font-semibold text-white shadow-soft sm:size-14 sm:text-sm ${node.c}`}
-                      animate={
-                        reduce ? undefined : { y: [0, i % 2 === 0 ? -6 : 6, 0] }
-                      }
-                      transition={{
-                        duration: 3.8 + i * 0.25,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    >
-                      {node.t}
-                    </motion.div>
-                  </div>
-                ))}
-                <svg
-                  className="pointer-events-none absolute top-6 left-6 right-6 h-2 sm:top-7"
-                  viewBox="0 0 100 8"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <motion.path
-                    d="M0 4 H100"
-                    stroke="#10B981"
-                    strokeWidth="1.5"
-                    strokeDasharray="5 5"
-                    fill="none"
-                    animate={{ pathLength: [0.2, 1], opacity: [0.4, 1] }}
-                    transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
-                  />
-                </svg>
-              </div>
+          {/* Floating call / data packets */}
+          {!reduce &&
+            [
+              { x: 250, y: 280, delay: 0 },
+              { x: 480, y: 120, delay: 0.8 },
+              { x: 640, y: 320, delay: 1.4 },
+            ].map((p) => (
+              <motion.g
+                key={`${p.x}-${p.y}`}
+                animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: p.delay,
+                }}
+              >
+                <rect
+                  x={p.x}
+                  y={p.y}
+                  width="36"
+                  height="18"
+                  rx="9"
+                  fill="#111827"
+                />
+                <circle cx={p.x + 10} cy={p.y + 9} r="3" fill="#10B981" />
+              </motion.g>
+            ))}
+        </svg>
 
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                <div className="rounded-xl border border-border bg-white p-3">
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[10px] font-medium text-muted">Call Queue</span>
-                    <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-semibold text-primary">
-                      Live
-                    </span>
-                  </div>
-                  <div className="space-y-2">
-                    {[72, 48, 90].map((w, i) => (
-                      <div key={i} className="h-1.5 overflow-hidden rounded-full bg-dark/5">
-                        <motion.div
-                          className="h-full rounded-full bg-primary"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${w}%` }}
-                          transition={{ delay: 0.5 + i * 0.12, duration: 0.8, ease: EASE }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="rounded-xl border border-border bg-white p-3">
-                  <span className="text-[10px] font-medium text-muted">AI Receptionist</span>
-                  <div className="mt-3 flex h-11 items-end gap-1">
-                    {[4, 7, 5, 9, 6, 8, 4, 7, 10, 5].map((h, i) => (
-                      <motion.div
-                        key={i}
-                        className="flex-1 rounded-sm bg-accent/85"
-                        animate={
-                          reduce
-                            ? { height: `${h * 8}%` }
-                            : {
-                                height: [`${h * 6}%`, `${((h + 3) % 10) * 8 + 22}%`, `${h * 6}%`],
-                              }
-                        }
-                        transition={{
-                          duration: 1.6 + i * 0.06,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Caption row */}
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-2 text-[11px] text-muted sm:mt-3 sm:text-xs">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="size-2 rounded-full bg-primary" /> Workflow sync
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="size-2 rounded-full bg-dark" /> Phone systems
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="size-2 rounded-full bg-accent" /> Outbound routes
+          </span>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

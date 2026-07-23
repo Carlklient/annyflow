@@ -11,11 +11,7 @@ export function Hero() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative overflow-x-clip bg-background pt-24 sm:pt-28">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute left-1/2 top-24 size-[min(420px,70vw)] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-      </div>
-
+    <section className="relative overflow-x-clip bg-white pt-24 sm:pt-28">
       <div className="relative mx-auto flex max-w-3xl flex-col items-center px-5 text-center sm:px-8">
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 10 }}
@@ -30,9 +26,9 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.06, ease: EASE }}
-          className="mt-5 font-display text-[2.25rem] font-semibold leading-[1.12] tracking-tight text-dark sm:text-5xl md:text-[3.5rem]"
+          className="mt-5 font-display text-[2.25rem] font-semibold leading-[1.12] tracking-tight text-dark sm:text-5xl md:text-[3.4rem]"
         >
-          Automation and calling infrastructure, engineered for scale.
+          Connect every system. Scale every call.
         </motion.h1>
 
         <motion.p
@@ -41,8 +37,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.16, ease: EASE }}
           className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
         >
-          Business automation, spreadsheets, phone systems, and outbound dialing—
-          built so your operations run like modern software.
+          Automation, spreadsheets, phone systems, and outbound infrastructure—
+          designed so your business runs as one connected operation.
         </motion.p>
 
         <motion.div
@@ -62,9 +58,9 @@ export function Hero() {
       </div>
 
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 28 }}
+        initial={reduce ? false : { opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, delay: 0.35, ease: EASE }}
+        transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
         className="relative mx-auto mt-14 w-full max-w-5xl px-5 sm:mt-16 sm:px-8 lg:mt-20 lg:px-10"
       >
         <HeroIllustration />
