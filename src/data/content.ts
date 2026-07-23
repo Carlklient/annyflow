@@ -905,10 +905,9 @@ export const FEATURED_PORTFOLIO = PORTFOLIO.filter((p) =>
 );
 
 export const SITE_STATS = [
-  { value: "2,000+", label: "Projects completed" },
-  { value: "98%", label: "Client satisfaction" },
-  { value: "4.9/5", label: "Average review score" },
-  { value: "Excel · Sheets", label: "Spreadsheet automation" },
+  { value: 128, suffix: "+", label: "Projects completed" },
+  { value: 98, suffix: "%", label: "Client satisfaction" },
+  { value: 4.9, suffix: "/5", label: "Average review score", decimals: 1 },
 ] as const;
 
 export const FAQ_ITEMS = [

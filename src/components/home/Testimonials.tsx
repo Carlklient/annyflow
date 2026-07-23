@@ -13,7 +13,7 @@ export function Testimonials() {
         <SectionHeading
           eyebrow="Client outcomes"
           title="Trusted across thousands of deliveries"
-          description="2,000+ projects shipped with strong reviews—automation, spreadsheets, voice, and outbound."
+          description="128+ projects shipped with strong reviews—automation, spreadsheets, voice, and outbound."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
