@@ -6,17 +6,30 @@ AnnyFlow helps teams connect CRMs, spreadsheets, PBX phone systems, and outbound
 
 ## Primary services
 
-- Business Automation: workflow automation (Make, n8n, Zapier, Power Automate), CRM systems, AI automation
-- Spreadsheet Automation: Microsoft Excel, Google Sheets, Airtable, dashboards, data pipelines
-- Business Phone Systems: 3CX, FreePBX, Asterisk, SIP trunks, IVR, call queues, CRM sync
-- Outbound Calling: Vicidial, GoAutoDial, predictive/progressive dialers, campaign management
+- Business Automation: https://annyflow.vercel.app/solutions/business-automation
+- Spreadsheet Automation: https://annyflow.vercel.app/solutions/spreadsheet-automation
+- Business Phone Systems: https://annyflow.vercel.app/solutions/business-phone-systems
+- Outbound Calling: https://annyflow.vercel.app/solutions/outbound-calling
+
+## Engagements
+
+- Automation audit
+- Spreadsheet rebuild
+- Business phone setup
+- Outbound dialer launch
+
+## Proof
+
+- Case studies: https://annyflow.vercel.app/case-studies
+- Portfolio: https://annyflow.vercel.app/portfolio
+- Guides: https://annyflow.vercel.app/guides
 
 ## Key facts
 
 - Brand: AnnyFlow
 - Founder: Annybest (Automation Solutions Architect)
 - Website: https://annyflow.vercel.app
-- Contact: /contact
+- Contact: https://annyflow.vercel.app/contact
 - Email: mercyanny2020@gmail.com
 - Projects completed: 128+
 - Client satisfaction: 98%
@@ -33,15 +46,14 @@ A: Growing businesses and operations teams that need CRM workflows, Excel/Sheets
 Q: How do I contact AnnyFlow?
 A: Book a free consultation at https://annyflow.vercel.app/contact or via WhatsApp, Telegram, Discord, or email.
 
-## Sitemap
+## Sitemap highlights
 
-- / (Home)
-- /solutions
+- /solutions/[pillar]
+- /case-studies and /case-studies/[slug]
+- /guides and /guides/[slug]
 - /portfolio
 - /about
 - /contact
-- /privacy
-- /terms
 
 ## Optional
 

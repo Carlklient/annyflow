@@ -19,7 +19,7 @@ export function JsonLd({ extra = [] }: JsonLdProps) {
     founder: {
       "@type": "Person",
       name: SITE.founder,
-      jobTitle: "Founder & Automation Solutions Architect",
+      jobTitle: "Founder and Automation Solutions Architect",
       worksFor: { "@id": `${SITE.url}/#organization` },
     },
     contactPoint: [

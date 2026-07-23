@@ -1,7 +1,8 @@
 "use client";
 
-import { type FormEvent, type ReactNode, useState } from "react";
+import { type FormEvent, type ReactNode, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { ChevronDown, CheckCircle2, MapPin, Send, Loader2, Mail, Calendar, MessageCircle } from "lucide-react";
 import { FAQ_ITEMS } from "@/data/content";
 import { CONTACT_CHANNELS, SITE } from "@/lib/constants";
@@ -22,11 +23,28 @@ const hasWeb3FormsKey = Boolean(
   process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim(),
 );
 
+const INTEREST_VALUES = new Set([
+  "automation",
+  "spreadsheet",
+  "phone",
+  "outbound",
+  "other",
+]);
+
 export function ContactContent() {
+  const searchParams = useSearchParams();
+  const interestFromUrl = searchParams.get("interest") || "";
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [interest, setInterest] = useState("");
+
+  useEffect(() => {
+    if (INTEREST_VALUES.has(interestFromUrl)) {
+      setInterest(interestFromUrl);
+    }
+  }, [interestFromUrl]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,8 +134,27 @@ export function ContactContent() {
         <SectionHeading
           eyebrow="Contact"
           title="Let's build your next system"
-          description="Share a bit about your stack and goals. We will respond with a clear next step."
+          description="Usual reply within 1 business day. Prefer a call? Book a free 20 to 30 minute discovery slot below."
         />
+
+        {bookingUrl ? (
+          <FadeIn className="mx-auto mt-10 max-w-3xl">
+            <div className="flex flex-col items-start justify-between gap-4 rounded-3xl border border-primary/20 bg-primary/5 p-5 sm:flex-row sm:items-center sm:p-6">
+              <div>
+                <p className="font-display text-lg font-semibold text-dark">
+                  Book a free discovery call
+                </p>
+                <p className="mt-1 text-sm text-muted">
+                  No obligation. We map bottlenecks and recommend one clear path.
+                </p>
+              </div>
+              <Button href={bookingUrl} external size="lg" className="shrink-0">
+                <Calendar className="size-4" />
+                Pick a time
+              </Button>
+            </div>
+          </FadeIn>
+        ) : null}
 
         <div className="mt-14 grid gap-8 lg:grid-cols-5">
           <FadeIn className="lg:col-span-3">
@@ -221,7 +258,8 @@ export function ContactContent() {
                       id="interest"
                       name="interest"
                       className={fieldClass}
-                      defaultValue=""
+                      value={interest}
+                      onChange={(e) => setInterest(e.target.value)}
                       required
                     >
                       <option value="" disabled>

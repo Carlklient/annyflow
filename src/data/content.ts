@@ -13,7 +13,7 @@ export const SOLUTIONS: SolutionCategory[] = [
     title: "Business Automation",
     description:
       "Workflow, CRM, and AI systems businesses actually run: connected, automated, and built to scale.",
-    href: "/solutions#business-automation",
+    href: "/solutions/business-automation",
     icon: "workflow",
     items: [
       {
@@ -79,7 +79,7 @@ export const SOLUTIONS: SolutionCategory[] = [
     title: "Spreadsheet Automation",
     description:
       "Excel, Google Sheets, and Airtable systems that replace manual work with dashboards, formulas, scripts, and data pipelines teams rely on every day.",
-    href: "/solutions#spreadsheet-automation",
+    href: "/solutions/spreadsheet-automation",
     icon: "spreadsheet",
     items: [
       {
@@ -125,7 +125,7 @@ export const SOLUTIONS: SolutionCategory[] = [
     title: "Business Phone Systems",
     description:
       "Reliable PBX, IVR, and CRM-connected phone infrastructure for teams that need clarity and control.",
-    href: "/solutions#business-phone-systems",
+    href: "/solutions/business-phone-systems",
     icon: "phone",
     items: [
       {
@@ -147,7 +147,7 @@ export const SOLUTIONS: SolutionCategory[] = [
     title: "Outbound Calling Infrastructure",
     description:
       "High-performance dialing platforms, campaign tooling, and AI voice systems built for scale.",
-    href: "/solutions#outbound-calling",
+    href: "/solutions/outbound-calling",
     icon: "outbound",
     items: [
       {
