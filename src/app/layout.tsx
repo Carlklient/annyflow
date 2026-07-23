@@ -86,7 +86,9 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    google:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+      "1nCJmI520QWea869xMT4PZwyPuFRwqMZwimPCiRVveY",
   },
   alternates: {
     canonical: SITE.url,
