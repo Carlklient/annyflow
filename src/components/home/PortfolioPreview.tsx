@@ -18,8 +18,8 @@ export function PortfolioPreview() {
           <SectionHeading
             align="left"
             eyebrow="Portfolio"
-            title="Featured automation solutions"
-            description="Real platforms. Solution-based systems. Built for how modern businesses actually operate."
+            title="Featured solutions that ship"
+            description="Automation, spreadsheets, phone systems, and outbound—real platforms built for how modern businesses operate."
             className="md:max-w-xl"
           />
           <Button href="/portfolio" variant="secondary">

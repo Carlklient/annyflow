@@ -396,6 +396,28 @@ function Illustration({ visual, project }: { visual: PortfolioVisual; project: P
           ))}
         </svg>
       );
+    case "spreadsheet":
+      return (
+        <svg viewBox="0 0 400 250" className="h-full w-full" aria-hidden>
+          <GradientBg id={gid} from="#064E3B" to={accent} mid="#111827" />
+          <rect width="400" height="250" fill={`url(#${gid})`} />
+          <rect x="40" y="36" width="320" height="178" rx="14" fill="white" opacity="0.12" />
+          {[0, 1, 2, 3, 4].map((row) =>
+            [0, 1, 2, 3, 4].map((col) => (
+              <rect
+                key={`${row}-${col}`}
+                x={52 + col * 60}
+                y={48 + row * 32}
+                width="52"
+                height="24"
+                rx="4"
+                fill={row === 0 || col === 0 ? "#10B981" : "white"}
+                opacity={row === 0 || col === 0 ? 0.55 : 0.1 + ((row + col) % 3) * 0.05}
+              />
+            ))
+          )}
+        </svg>
+      );
     case "phone":
     case "phone-3cx":
     case "phone-cloud":

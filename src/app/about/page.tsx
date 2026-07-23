@@ -4,7 +4,7 @@ import { AboutContent } from "@/components/about/AboutContent";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Meet Annybest, Founder of AnnyFlow—Automation Solutions Architect specializing in business automation, CRM, phone systems, and outbound calling.",
+    "Meet Annybest, Founder of AnnyFlow—Automation Solutions Architect specializing in business automation, spreadsheet systems, CRM, phone systems, and outbound calling.",
   openGraph: {
     title: "Meet the Founder · AnnyFlow",
     description:

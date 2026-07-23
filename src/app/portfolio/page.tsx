@@ -5,11 +5,11 @@ import { CTASection } from "@/components/home/CTASection";
 export const metadata: Metadata = {
   title: "Portfolio",
   description:
-    "AnnyFlow business automation portfolio—workflow platforms, CRM systems, LMS, booking, AI automation, phone systems, and outbound calling.",
+    "AnnyFlow portfolio—workflow platforms, Excel & Google Sheets, CRM systems, phone systems, and outbound calling.",
   openGraph: {
     title: "Portfolio · AnnyFlow",
     description:
-      "Solution-based automation systems with real platforms like HubSpot, Clio, Make, n8n, and Zapier.",
+      "Solution-based systems with Excel, Google Sheets, Airtable, HubSpot, Make, n8n, and Zapier.",
   },
 };
 

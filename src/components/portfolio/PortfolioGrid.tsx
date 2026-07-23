@@ -7,22 +7,26 @@ import {
   OUTBOUND_FILTERS,
   PHONE_FILTERS,
   PORTFOLIO,
+  SPREADSHEET_FILTERS,
   type AutomationSolutionType,
   type OutboundSolutionType,
   type PhoneSolutionType,
+  type SpreadsheetSolutionType,
 } from "@/data/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { cn } from "@/lib/utils";
 import { getLocationHash, scrollToHash } from "@/lib/hash-scroll";
 
-type PillarTab = "automation" | "phone" | "outbound";
+type PillarTab = "automation" | "spreadsheet" | "phone" | "outbound";
 type AutomationFilter = (typeof AUTOMATION_FILTERS)[number]["id"];
+type SpreadsheetFilter = (typeof SPREADSHEET_FILTERS)[number]["id"];
 type PhoneFilter = (typeof PHONE_FILTERS)[number]["id"];
 type OutboundFilter = (typeof OUTBOUND_FILTERS)[number]["id"];
 
 const PILLAR_TABS: { id: PillarTab; label: string }[] = [
   { id: "automation", label: "Business Automation" },
+  { id: "spreadsheet", label: "Spreadsheet Automation" },
   { id: "phone", label: "Business Phone Systems" },
   { id: "outbound", label: "Outbound Calling" },
 ];
@@ -30,6 +34,7 @@ const PILLAR_TABS: { id: PillarTab; label: string }[] = [
 export function PortfolioGrid() {
   const [pillar, setPillar] = useState<PillarTab>("automation");
   const [automationFilter, setAutomationFilter] = useState<AutomationFilter>("all");
+  const [spreadsheetFilter, setSpreadsheetFilter] = useState<SpreadsheetFilter>("all");
   const [phoneFilter, setPhoneFilter] = useState<PhoneFilter>("all");
   const [outboundFilter, setOutboundFilter] = useState<OutboundFilter>("all");
 
@@ -39,6 +44,12 @@ export function PortfolioGrid() {
     if (pillar === "automation" && automationFilter !== "all") {
       return byPillar.filter(
         (p) => p.solutionType === (automationFilter as AutomationSolutionType)
+      );
+    }
+
+    if (pillar === "spreadsheet" && spreadsheetFilter !== "all") {
+      return byPillar.filter(
+        (p) => p.solutionType === (spreadsheetFilter as SpreadsheetSolutionType)
       );
     }
 
@@ -53,7 +64,7 @@ export function PortfolioGrid() {
     }
 
     return byPillar;
-  }, [pillar, automationFilter, phoneFilter, outboundFilter]);
+  }, [pillar, automationFilter, spreadsheetFilter, phoneFilter, outboundFilter]);
 
   useEffect(() => {
     const hash = getLocationHash();
@@ -62,6 +73,7 @@ export function PortfolioGrid() {
     if (!project) return;
     setPillar(project.pillar);
     if (project.pillar === "automation") setAutomationFilter("all");
+    if (project.pillar === "spreadsheet") setSpreadsheetFilter("all");
     if (project.pillar === "phone") setPhoneFilter("all");
     if (project.pillar === "outbound") setOutboundFilter("all");
     scrollToHash(hash);
@@ -81,7 +93,7 @@ export function PortfolioGrid() {
         <SectionHeading
           eyebrow="Portfolio"
           title="Business solutions that actually ship"
-          description="Solution-based implementations across workflow platforms, CRMs, LMS, booking systems, AI automation, phone systems, and outbound infrastructure."
+          description="Solution-based implementations across workflow platforms, spreadsheets, CRMs, phone systems, and outbound infrastructure."
         />
 
         <div className="mt-10 -mx-5 overflow-x-auto px-5 hide-scrollbar sm:mx-0 sm:overflow-visible sm:px-0">
@@ -99,6 +111,7 @@ export function PortfolioGrid() {
               onClick={() => {
                 setPillar(tab.id);
                 if (tab.id === "automation") setAutomationFilter("all");
+                if (tab.id === "spreadsheet") setSpreadsheetFilter("all");
                 if (tab.id === "phone") setPhoneFilter("all");
                 if (tab.id === "outbound") setOutboundFilter("all");
               }}
@@ -123,6 +136,16 @@ export function PortfolioGrid() {
               filters={AUTOMATION_FILTERS}
               active={automationFilter}
               onChange={setAutomationFilter}
+            />
+          )}
+
+          {pillar === "spreadsheet" && (
+            <CategoryFilters
+              key="spreadsheet-filters"
+              label="Spreadsheet automation categories"
+              filters={SPREADSHEET_FILTERS}
+              active={spreadsheetFilter}
+              onChange={setSpreadsheetFilter}
             />
           )}
 

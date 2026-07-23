@@ -4,9 +4,9 @@
  */
 export const SITE = {
   name: "AnnyFlow",
-  tagline: "Business Automation · Phone Systems · Outbound Calling",
+  tagline: "Business Automation · Spreadsheets · Phone Systems · Outbound Calling",
   description:
-    "AnnyFlow builds enterprise-grade business automation, business phone systems, and outbound calling infrastructure for modern companies.",
+    "AnnyFlow builds enterprise-grade business automation, spreadsheet systems, business phone systems, and outbound calling infrastructure for modern companies.",
   url: (() => {
     const fallback = "https://annyflow.vercel.app";
     const raw = (process.env.NEXT_PUBLIC_SITE_URL || fallback).trim();
@@ -105,6 +105,9 @@ export const TECH_LOGOS = [
   "Make",
   "n8n",
   "Zapier",
+  "Excel",
+  "Google Sheets",
+  "Airtable",
   "3CX",
   "Vicidial",
   "HubSpot",
@@ -113,7 +116,6 @@ export const TECH_LOGOS = [
   "Twilio",
   "Notion",
   "ClickUp",
-  "Airtable",
 ] as const;
 
 export const FOOTER_LINKS = {
@@ -126,6 +128,7 @@ export const FOOTER_LINKS = {
   ],
   solutions: [
     { href: "/solutions#business-automation", label: "Business Automation" },
+    { href: "/solutions#spreadsheet-automation", label: "Spreadsheet Automation" },
     { href: "/solutions#business-phone-systems", label: "Business Phone Systems" },
     { href: "/solutions#outbound-calling", label: "Outbound Calling" },
   ],
@@ -137,6 +140,7 @@ export const FOOTER_LINKS = {
 
 const INTEREST_LABEL: Record<string, string> = {
   automation: "Business Automation",
+  spreadsheet: "Spreadsheet Automation",
   phone: "Business Phone Systems",
   outbound: "Outbound Calling Infrastructure",
   other: "General inquiry",

@@ -3,7 +3,7 @@ export type SolutionCategory = {
   title: string;
   description: string;
   href: string;
-  icon: "workflow" | "phone" | "outbound";
+  icon: "workflow" | "phone" | "outbound" | "spreadsheet";
   items: { title: string; tags: string[] }[];
 };
 
@@ -75,6 +75,52 @@ export const SOLUTIONS: SolutionCategory[] = [
     ],
   },
   {
+    id: "spreadsheet-automation",
+    title: "Spreadsheet Automation",
+    description:
+      "Excel, Google Sheets, and Airtable systems that replace manual work—dashboards, formulas, scripts, and data pipelines teams rely on every day.",
+    href: "/solutions#spreadsheet-automation",
+    icon: "spreadsheet",
+    items: [
+      {
+        title: "Microsoft Excel",
+        tags: [
+          "Advanced Formulas",
+          "VBA Macros",
+          "Power Query",
+          "Power Pivot",
+          "Dashboards",
+          "Financial Models",
+        ],
+      },
+      {
+        title: "Google Sheets",
+        tags: [
+          "Apps Script",
+          "ARRAYFORMULA",
+          "QUERY",
+          "IMPORTRANGE",
+          "Automation Triggers",
+          "Shared Dashboards",
+        ],
+      },
+      {
+        title: "Airtable & Databases",
+        tags: ["Airtable", "Interfaces", "Automations", "Synced Tables", "Forms", "Reporting"],
+      },
+      {
+        title: "Data Ops & Integrations",
+        tags: [
+          "CSV / API Pipelines",
+          "CRM ↔ Sheet Sync",
+          "Reporting Automation",
+          "Cleanup & Validation",
+          "Scheduled Refresh",
+        ],
+      },
+    ],
+  },
+  {
     id: "business-phone-systems",
     title: "Business Phone Systems",
     description:
@@ -137,7 +183,7 @@ export const SOLUTIONS: SolutionCategory[] = [
   },
 ];
 
-export type PortfolioPillar = "automation" | "phone" | "outbound";
+export type PortfolioPillar = "automation" | "spreadsheet" | "phone" | "outbound";
 
 export type AutomationSolutionType =
   | "workflow"
@@ -152,6 +198,14 @@ export type AutomationSolutionType =
   | "time-tracking"
   | "project-management"
   | "ai-automation";
+
+export type SpreadsheetSolutionType =
+  | "excel"
+  | "google-sheets"
+  | "airtable"
+  | "data-pipelines"
+  | "dashboards"
+  | "reporting";
 
 export type PhoneSolutionType =
   | "3cx"
@@ -193,6 +247,7 @@ export type PortfolioVisual =
   | "time"
   | "project"
   | "ai"
+  | "spreadsheet"
   | "phone"
   | "phone-3cx"
   | "phone-cloud"
@@ -216,7 +271,11 @@ export type PortfolioItem = {
   title: string;
   categoryLabel: string;
   pillar: PortfolioPillar;
-  solutionType?: AutomationSolutionType | PhoneSolutionType | OutboundSolutionType;
+  solutionType?:
+    | AutomationSolutionType
+    | SpreadsheetSolutionType
+    | PhoneSolutionType
+    | OutboundSolutionType;
   summary: string;
   platforms: string[];
   automations: string[];
@@ -240,6 +299,16 @@ export const AUTOMATION_FILTERS = [
   { id: "time-tracking", label: "Time Tracking" },
   { id: "project-management", label: "Project Management" },
   { id: "ai-automation", label: "AI Automation" },
+] as const;
+
+export const SPREADSHEET_FILTERS = [
+  { id: "all", label: "All" },
+  { id: "excel", label: "Microsoft Excel" },
+  { id: "google-sheets", label: "Google Sheets" },
+  { id: "airtable", label: "Airtable" },
+  { id: "data-pipelines", label: "Data Pipelines" },
+  { id: "dashboards", label: "Dashboards" },
+  { id: "reporting", label: "Reporting" },
 ] as const;
 
 export const PHONE_FILTERS = [
@@ -287,6 +356,62 @@ export const PORTFOLIO: PortfolioItem[] = [
     accent: "#10B981",
     visual: "workflow",
     image: "/portfolio/workflow-automation.png",
+  },
+  {
+    id: "excel-financial-dashboard",
+    title: "Excel Financial Dashboard Suite",
+    categoryLabel: "Microsoft Excel",
+    pillar: "spreadsheet",
+    solutionType: "excel",
+    summary:
+      "Multi-sheet Excel models with Power Query, Pivot analytics, and executive dashboards that refresh from live data sources.",
+    platforms: ["Microsoft Excel", "Power Query", "Power Pivot"],
+    automations: ["Financial Models", "KPI Dashboards", "Automated Refresh"],
+    accent: "#217346",
+    visual: "spreadsheet",
+    image: "/portfolio/campaign-analytics-dashboard.png",
+  },
+  {
+    id: "google-sheets-ops-automation",
+    title: "Google Sheets Ops Automation",
+    categoryLabel: "Google Sheets",
+    pillar: "spreadsheet",
+    solutionType: "google-sheets",
+    summary:
+      "Apps Script workflows that sync CRM data, auto-assign tasks, send alerts, and keep shared ops sheets accurate without manual copy-paste.",
+    platforms: ["Google Sheets", "Apps Script", "Google Forms"],
+    automations: ["CRM Sync", "Auto Alerts", "Team Dashboards"],
+    accent: "#0F9D58",
+    visual: "spreadsheet",
+    image: "/portfolio/project-management-automation.png",
+  },
+  {
+    id: "airtable-pipeline-system",
+    title: "Airtable Pipeline System",
+    categoryLabel: "Airtable",
+    pillar: "spreadsheet",
+    solutionType: "airtable",
+    summary:
+      "Airtable bases with interfaces, forms, and automations for lead tracking, project delivery, and client reporting.",
+    platforms: ["Airtable", "Interfaces", "Automations"],
+    automations: ["Lead Pipeline", "Status Alerts", "Client Views"],
+    accent: "#18BFFF",
+    visual: "spreadsheet",
+    image: "/portfolio/sales-pipeline-automation.png",
+  },
+  {
+    id: "spreadsheet-reporting-pipeline",
+    title: "Automated Reporting Pipeline",
+    categoryLabel: "Data Pipelines",
+    pillar: "spreadsheet",
+    solutionType: "data-pipelines",
+    summary:
+      "Scheduled CSV/API feeds into Sheets and Excel with validation, cleanup, and weekly management reports delivered automatically.",
+    platforms: ["Google Sheets", "Excel", "Make", "n8n"],
+    automations: ["Data Cleanup", "Scheduled Reports", "API Imports"],
+    accent: "#059669",
+    visual: "spreadsheet",
+    image: "/portfolio/agent-performance-dashboard.png",
   },
   {
     id: "sales-pipeline-automation",
@@ -769,26 +894,38 @@ export const PORTFOLIO: PortfolioItem[] = [
 export const FEATURED_PORTFOLIO = PORTFOLIO.filter((p) =>
   [
     "business-workflow-automation",
+    "excel-financial-dashboard",
+    "google-sheets-ops-automation",
+    "airtable-pipeline-system",
     "sales-pipeline-automation",
     "ai-customer-support-automation",
     "enterprise-3cx-deployment",
     "vicidial-sales-infrastructure",
-    "healthcare-appointment-automation",
-    "predictive-dialing-platform",
-    "cloud-pbx-infrastructure",
   ].includes(p.id)
 );
+
+export const SITE_STATS = [
+  { value: "2,000+", label: "Projects completed" },
+  { value: "98%", label: "Client satisfaction" },
+  { value: "4.9/5", label: "Average review score" },
+  { value: "Excel · Sheets", label: "Spreadsheet automation" },
+] as const;
 
 export const FAQ_ITEMS = [
   {
     question: "How quickly can AnnyFlow start a new engagement?",
     answer:
-      "Most discovery consultations are scheduled within a few business days. Implementation timelines depend on scope, but lean automation projects often launch in weeks—not months.",
+      "Most discovery consultations are scheduled within a few business days. Implementation timelines depend on scope, but lean automation and spreadsheet projects often launch in weeks—not months.",
   },
   {
     question: "Do you work with existing tools or replace everything?",
     answer:
-      "We prefer to integrate what already works. Whether you run HubSpot, Salesforce, 3CX, or Vicidial, we connect systems cleanly before recommending replacements.",
+      "We prefer to integrate what already works. Whether you run HubSpot, Salesforce, Excel, Google Sheets, 3CX, or Vicidial, we connect systems cleanly before recommending replacements.",
+  },
+  {
+    question: "What does spreadsheet automation cover?",
+    answer:
+      "Excel (formulas, VBA, Power Query), Google Sheets (Apps Script, dashboards), Airtable bases, reporting pipelines, and CRM-to-sheet sync—so teams stop copying data by hand.",
   },
   {
     question: "Can you support both cloud and on-premise phone systems?",
@@ -823,5 +960,12 @@ export const TESTIMONIALS = [
     industry: "Multi-site business",
     quote:
       "The phone system rollout was calm and structured—queues, IVR, and CRM sync worked on day one without disrupting the team.",
+  },
+  {
+    name: "Priya S.",
+    role: "Finance Controller",
+    industry: "Growing SaaS company",
+    quote:
+      "Our Excel and Sheets reporting used to take days. AnnyFlow automated the pipelines—dashboards refresh themselves and leadership trusts the numbers.",
   },
 ];

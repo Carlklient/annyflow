@@ -228,6 +228,7 @@ export function ContactContent() {
                         Select a focus area
                       </option>
                       <option value="automation">Business Automation</option>
+                      <option value="spreadsheet">Spreadsheet Automation</option>
                       <option value="phone">Business Phone Systems</option>
                       <option value="outbound">Outbound Calling Infrastructure</option>
                       <option value="other">Something else</option>

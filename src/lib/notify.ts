@@ -12,6 +12,7 @@ export type NotifyResult = {
 function interestLabel(interest?: string) {
   const map: Record<string, string> = {
     automation: "Business Automation",
+    spreadsheet: "Spreadsheet Automation",
     phone: "Business Phone Systems",
     outbound: "Outbound Calling Infrastructure",
     other: "General inquiry",

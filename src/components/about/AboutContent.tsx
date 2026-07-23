@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 
 const SPECIALTIES = [
   "Business Automation",
+  "Spreadsheet Automation",
   "CRM Solutions",
   "Business Phone Systems",
   "Outbound Calling Infrastructure",

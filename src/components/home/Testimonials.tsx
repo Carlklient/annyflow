@@ -12,11 +12,11 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <SectionHeading
           eyebrow="Client outcomes"
-          title="What teams say after we ship"
-          description="Feedback from operators who needed systems that work under real call and workflow load."
+          title="Trusted across thousands of deliveries"
+          description="2,000+ projects shipped with strong reviews—automation, spreadsheets, voice, and outbound."
         />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {TESTIMONIALS.map((item, i) => (
             <FadeIn key={item.name} delay={i * 0.06}>
               <motion.blockquote

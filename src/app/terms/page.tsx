@@ -30,7 +30,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-display text-lg font-semibold text-dark">Services</h2>
             <p className="mt-2">
-              {SITE.name} provides business automation, phone systems, and outbound calling
+              {SITE.name} provides business automation, spreadsheet automation, phone systems, and outbound calling
               infrastructure services. Website content is for general information. Project scope,
               timelines, and fees are confirmed separately in writing before work begins.
             </p>

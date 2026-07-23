@@ -14,7 +14,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Business Automation & Calling Infrastructure`,
+    default: `${SITE.name} — Automation, Spreadsheets & Calling Infrastructure`,
     template: `%s · ${SITE.name}`,
   },
   description: SITE.description,
@@ -54,12 +54,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} — Business Automation & Calling Infrastructure`,
+    title: `${SITE.name} — Automation, Spreadsheets & Calling Infrastructure`,
     description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — Business Automation & Calling Infrastructure`,
+    title: `${SITE.name} — Automation, Spreadsheets & Calling Infrastructure`,
     description: SITE.description,
   },
   robots: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Radio, Workflow } from "lucide-react";
+import { Phone, Radio, Table2, Workflow } from "lucide-react";
 import { SOLUTIONS } from "@/data/content";
 import { FadeIn, Stagger, StaggerItem } from "@/components/ui/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,6 +10,7 @@ const ICONS = {
   workflow: Workflow,
   phone: Phone,
   outbound: Radio,
+  spreadsheet: Table2,
 } as const;
 
 export function SolutionsPageContent() {
@@ -19,7 +20,7 @@ export function SolutionsPageContent() {
         <SectionHeading
           eyebrow="Solutions"
           title="Infrastructure for the way modern teams work"
-          description="Three tightly scoped practice areas—automation, voice, and outbound—delivered with enterprise rigor."
+          description="Four tightly scoped practice areas—automation, spreadsheets, voice, and outbound—delivered with enterprise rigor."
         />
       </div>
 

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/Hero";
+import { StatsBar } from "@/components/home/StatsBar";
 import { TechMarquee } from "@/components/home/TechMarquee";
 import { SolutionsPreview } from "@/components/home/SolutionsPreview";
 import { PortfolioPreview } from "@/components/home/PortfolioPreview";
@@ -9,6 +10,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <StatsBar />
       <TechMarquee />
       <SolutionsPreview />
       <PortfolioPreview />

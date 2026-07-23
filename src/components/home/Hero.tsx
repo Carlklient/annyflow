@@ -44,7 +44,7 @@ export function Hero() {
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="mt-4 font-display text-[2rem] font-semibold leading-tight tracking-tight text-dark sm:text-5xl lg:text-[3.5rem] lg:leading-[1.08]"
           >
-            Automation and calling infrastructure, engineered for scale.
+            Automation, spreadsheets, and calling infrastructure—engineered for scale.
           </motion.h1>
 
           <motion.p
@@ -53,8 +53,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.18 }}
             className="mt-5 max-w-md text-base leading-relaxed text-muted sm:text-lg"
           >
-            We design business automation, phone systems, and outbound dialing platforms
-            that operate like modern software products.
+            We design business automation, spreadsheet systems, phone platforms, and
+            outbound dialing stacks that operate like modern software products.
           </motion.p>
 
           <motion.div
