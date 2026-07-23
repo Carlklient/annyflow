@@ -51,7 +51,7 @@ function AnimatedStat({
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -4, transition: { duration: 0.25 } }}
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-6 text-center backdrop-blur-sm sm:px-6 sm:py-7 lg:text-left"
+      className="prism-border prism-border-soft prism-sheen group relative overflow-hidden rounded-2xl glass-dark px-5 py-6 text-center sm:px-6 sm:py-7 lg:text-left"
     >
       <motion.span
         aria-hidden
@@ -62,7 +62,7 @@ function AnimatedStat({
         }}
       />
       <motion.p
-        className="relative font-display text-3xl font-semibold tracking-tight text-primary sm:text-4xl lg:text-[2.75rem]"
+        className="relative z-[1] font-display text-3xl font-semibold tracking-tight text-primary sm:text-4xl lg:text-[2.75rem]"
         animate={
           inView
             ? {
@@ -79,10 +79,10 @@ function AnimatedStat({
         {display}
         {suffix}
       </motion.p>
-      <p className="relative mt-2 text-sm text-white/60">{label}</p>
+      <p className="relative z-[1] mt-2 text-sm text-white/60">{label}</p>
       <motion.div
         aria-hidden
-        className="absolute bottom-0 left-0 h-0.5 w-full origin-left bg-gradient-to-r from-primary via-primary/60 to-transparent"
+        className="absolute bottom-0 left-0 z-[1] h-0.5 w-full origin-left bg-gradient-to-r from-primary via-sky-400/70 to-accent/60"
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
@@ -94,17 +94,17 @@ function AnimatedStat({
 
 export function StatsBar() {
   return (
-    <section className="relative overflow-hidden border-y border-border/70 bg-dark text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.18),_transparent_55%)]" />
+    <section className="relative overflow-hidden border-y border-white/10 bg-dark text-white">
+      <div className="pointer-events-none absolute inset-0 prism-mesh-dark" aria-hidden />
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -left-20 top-1/2 size-56 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl"
+        className="pointer-events-none absolute -left-20 top-1/2 size-56 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl"
         animate={{ opacity: [0.35, 0.7, 0.35], scale: [1, 1.15, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-16 top-0 size-48 rounded-full bg-accent/10 blur-3xl"
+        className="pointer-events-none absolute -right-16 top-0 size-48 rounded-full bg-sky-400/10 blur-3xl"
         animate={{ opacity: [0.25, 0.55, 0.25], x: [0, -12, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />

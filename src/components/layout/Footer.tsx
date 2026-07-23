@@ -9,9 +9,13 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-24 border-t border-border bg-dark text-white">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+    <footer className="relative mt-24 overflow-hidden border-t border-white/10 bg-dark text-white">
+      <div className="pointer-events-none absolute inset-0 prism-mesh-dark opacity-60" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <Logo variant="dark" size="lg" animated />

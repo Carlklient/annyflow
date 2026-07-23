@@ -10,18 +10,18 @@ import { LogoMark } from "@/components/brand/Logo";
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-x-clip pt-20">
-      {/* Animated background */}
-      <div className="pointer-events-none absolute inset-0 motion-safe:block">
-        <div className="absolute -top-24 -left-24 size-[min(420px,90vw)] animate-blob rounded-full bg-primary/15 blur-3xl" />
+      {/* Prism ambient mesh */}
+      <div className="pointer-events-none absolute inset-0 prism-mesh" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 motion-safe:block" aria-hidden>
+        <div className="absolute -top-24 -left-24 size-[min(420px,90vw)] animate-blob rounded-full bg-primary/20 blur-3xl" />
         <div
-          className="absolute top-1/3 -right-20 size-[min(380px,85vw)] animate-blob rounded-full bg-accent/15 blur-3xl"
+          className="absolute top-1/3 -right-20 size-[min(380px,85vw)] animate-blob rounded-full bg-sky-400/15 blur-3xl"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute bottom-0 left-1/3 size-[min(320px,70vw)] animate-blob rounded-full bg-primary/10 blur-3xl"
+          className="absolute bottom-0 left-1/3 size-[min(320px,70vw)] animate-blob rounded-full bg-accent/15 blur-3xl"
           style={{ animationDelay: "4s" }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.08),_transparent_55%)]" />
       </div>
 
       <div className="relative mx-auto grid min-h-[calc(100svh-5rem)] max-w-7xl items-center gap-8 px-5 py-10 sm:gap-10 sm:px-8 sm:py-12 lg:grid-cols-2 lg:gap-12 lg:px-10 lg:py-16">
@@ -30,9 +30,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-3"
+            className="inline-flex items-center gap-3 rounded-full glass-panel prism-border prism-border-soft px-3.5 py-2"
           >
-            <LogoMark size={36} />
+            <LogoMark size={28} />
             <span className="font-display text-sm font-semibold tracking-[0.18em] text-primary uppercase">
               AnnyFlow
             </span>
@@ -42,7 +42,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 font-display text-[2rem] font-semibold leading-tight tracking-tight text-dark sm:text-5xl lg:text-[3.5rem] lg:leading-[1.08]"
+            className="mt-5 font-display text-[2rem] font-semibold leading-tight tracking-tight text-dark sm:text-5xl lg:text-[3.5rem] lg:leading-[1.08]"
           >
             Automation, spreadsheets, and calling infrastructure—engineered for scale.
           </motion.h1>

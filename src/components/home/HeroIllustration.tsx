@@ -5,39 +5,42 @@ import { motion } from "framer-motion";
 export function HeroIllustration() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[560px] lg:max-w-none lg:aspect-[5/4]">
-      {/* Ambient glow */}
-      <div className="absolute inset-8 rounded-[2rem] bg-gradient-to-br from-primary/20 via-accent/10 to-transparent blur-2xl" />
+      {/* Prism ambient glow */}
+      <div
+        className="absolute inset-6 rounded-[2rem] bg-gradient-to-br from-primary/25 via-sky-400/15 to-accent/20 blur-2xl"
+        aria-hidden
+      />
 
       <motion.div
-        className="relative h-full overflow-hidden rounded-[1.5rem] border border-white/60 bg-white shadow-lift sm:rounded-[1.75rem]"
+        className="prism-border prism-sheen relative h-full overflow-hidden rounded-[1.5rem] glass-panel shadow-lift sm:rounded-[1.75rem]"
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       >
         {/* Top bar */}
-        <div className="flex items-center gap-2 border-b border-border/80 bg-background/80 px-4 py-3">
+        <div className="flex items-center gap-2 border-b border-white/50 bg-white/40 px-4 py-3 backdrop-blur-md">
           <span className="size-2.5 rounded-full bg-[#F87171]" />
           <span className="size-2.5 rounded-full bg-accent" />
           <span className="size-2.5 rounded-full bg-primary" />
-          <span className="ml-3 rounded-full bg-dark/5 px-3 py-1 text-[10px] font-medium tracking-wide text-muted uppercase">
+          <span className="ml-3 rounded-full border border-white/50 bg-white/50 px-3 py-1 text-[10px] font-medium tracking-wide text-muted uppercase backdrop-blur-sm">
             AnnyFlow Control Plane
           </span>
         </div>
 
         <div className="grid h-[calc(100%-2.75rem)] grid-cols-12 gap-3 p-3 sm:gap-4 sm:p-4">
           {/* Sidebar */}
-          <div className="col-span-3 hidden flex-col gap-2 rounded-2xl bg-dark p-3 text-white sm:flex">
+          <div className="col-span-3 hidden flex-col gap-2 rounded-2xl glass-dark p-3 text-white sm:flex">
             {["Automations", "Phone", "Outbound", "Reports"].map((item, i) => (
               <div
                 key={item}
                 className={`rounded-xl px-2.5 py-2 text-[10px] font-medium ${
-                  i === 0 ? "bg-primary text-white" : "text-white/55"
+                  i === 0 ? "bg-primary text-white shadow-glow" : "text-white/55"
                 }`}
               >
                 {item}
               </div>
             ))}
-            <div className="mt-auto rounded-xl bg-white/5 p-2.5">
+            <div className="mt-auto rounded-xl border border-white/10 bg-white/5 p-2.5">
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
                 <motion.div
                   className="h-full rounded-full bg-primary"
@@ -54,18 +57,18 @@ export function HeroIllustration() {
           <div className="col-span-12 flex flex-col gap-3 sm:col-span-9">
             <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {[
-                { label: "Workflows", value: "128", tone: "bg-primary/10 text-primary" },
-                { label: "Active Lines", value: "42", tone: "bg-accent/10 text-accent" },
-                { label: "Dial Rate", value: "97%", tone: "bg-dark/5 text-dark" },
+                { label: "Workflows", value: "128", tone: "text-primary" },
+                { label: "Active Lines", value: "42", tone: "text-accent" },
+                { label: "Dial Rate", value: "97%", tone: "text-dark" },
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-border/70 bg-background p-2.5 sm:p-3"
+                  className="rounded-2xl border border-white/60 bg-white/45 p-2.5 shadow-soft backdrop-blur-md sm:p-3"
                 >
                   <p className="text-[9px] font-medium tracking-wide text-muted uppercase">
                     {stat.label}
                   </p>
-                  <p className={`mt-1 font-display text-lg font-semibold sm:text-xl ${stat.tone.split(" ")[1]}`}>
+                  <p className={`mt-1 font-display text-lg font-semibold sm:text-xl ${stat.tone}`}>
                     {stat.value}
                   </p>
                 </div>
@@ -73,7 +76,7 @@ export function HeroIllustration() {
             </div>
 
             {/* Workflow nodes */}
-            <div className="relative flex-1 overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-background via-white to-primary/5 p-3 sm:p-4">
+            <div className="relative flex-1 overflow-hidden rounded-2xl border border-white/50 bg-gradient-to-br from-white/50 via-white/30 to-primary/10 p-3 backdrop-blur-sm sm:p-4">
               <p className="mb-3 text-[10px] font-semibold tracking-wide text-muted uppercase">
                 Live workflow
               </p>
@@ -114,7 +117,7 @@ export function HeroIllustration() {
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-2">
-                <div className="rounded-xl border border-border/60 bg-white p-2.5">
+                <div className="rounded-xl border border-white/60 bg-white/55 p-2.5 backdrop-blur-sm">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-[9px] font-medium text-muted">Call Queue</span>
                     <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[8px] font-semibold text-primary">
@@ -134,14 +137,16 @@ export function HeroIllustration() {
                     ))}
                   </div>
                 </div>
-                <div className="rounded-xl border border-border/60 bg-white p-2.5">
+                <div className="rounded-xl border border-white/60 bg-white/55 p-2.5 backdrop-blur-sm">
                   <span className="text-[9px] font-medium text-muted">AI Receptionist</span>
-                  <div className="mt-2 flex items-end gap-1 h-10">
+                  <div className="mt-2 flex h-10 items-end gap-1">
                     {[4, 7, 5, 9, 6, 8, 4, 7, 10, 5].map((h, i) => (
                       <motion.div
                         key={i}
                         className="flex-1 rounded-sm bg-accent/80"
-                        animate={{ height: [`${h * 6}%`, `${((h + 3) % 10) * 8 + 20}%`, `${h * 6}%`] }}
+                        animate={{
+                          height: [`${h * 6}%`, `${((h + 3) % 10) * 8 + 20}%`, `${h * 6}%`],
+                        }}
                         transition={{ duration: 1.6 + i * 0.08, repeat: Infinity, ease: "easeInOut" }}
                       />
                     ))}
@@ -153,9 +158,9 @@ export function HeroIllustration() {
         </div>
       </motion.div>
 
-      {/* Floating chips — inset on mobile to avoid horizontal scroll */}
+      {/* Floating chips */}
       <motion.div
-        className="absolute top-2 right-2 rounded-2xl border border-white/70 bg-white/95 px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:top-4 sm:right-0 sm:px-3 sm:py-2 sm:text-xs"
+        className="absolute top-2 right-2 rounded-2xl glass-panel prism-border prism-border-soft px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:top-4 sm:right-0 sm:px-3 sm:py-2 sm:text-xs"
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -163,7 +168,7 @@ export function HeroIllustration() {
         CRM sync active
       </motion.div>
       <motion.div
-        className="absolute bottom-4 left-2 rounded-2xl border border-white/70 bg-white/95 px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:bottom-10 sm:left-0 sm:px-3 sm:py-2 sm:text-xs"
+        className="absolute bottom-4 left-2 rounded-2xl glass-panel prism-border prism-border-soft px-2.5 py-1.5 text-[11px] font-medium shadow-lift sm:bottom-10 sm:left-0 sm:px-3 sm:py-2 sm:text-xs"
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >

@@ -16,12 +16,23 @@ export function CTASection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative overflow-hidden rounded-[1.75rem] bg-dark px-8 py-16 text-center sm:px-12 sm:py-20"
+        className="prism-border prism-sheen relative overflow-hidden rounded-[1.75rem] glass-dark px-8 py-16 text-center sm:px-12 sm:py-20"
       >
-        <div className="pointer-events-none absolute -top-20 left-1/4 size-64 rounded-full bg-primary/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 right-1/4 size-64 rounded-full bg-accent/20 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 prism-mesh-dark" aria-hidden />
+        <div
+          className="pointer-events-none absolute -top-20 left-1/4 size-64 rounded-full bg-primary/30 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 right-1/4 size-64 rounded-full bg-accent/20 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute top-1/2 right-1/3 size-40 -translate-y-1/2 rounded-full bg-sky-400/15 blur-3xl"
+          aria-hidden
+        />
 
-        <div className="relative">
+        <div className="relative z-[1]">
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">
             Next step
           </p>
@@ -45,12 +56,23 @@ export function CTASection() {
               </Button>
             )}
             {whatsapp ? (
-              <Button href={whatsapp.href} external variant="secondary" size="lg" className="border-0">
+              <Button
+                href={whatsapp.href}
+                external
+                variant="secondary"
+                size="lg"
+                className="border-0 bg-white/10 text-white backdrop-blur-sm hover:bg-white/15"
+              >
                 <MessageCircle className="size-4" />
                 Chat on WhatsApp
               </Button>
             ) : (
-              <Button href="/portfolio" variant="secondary" size="lg" className="border-0">
+              <Button
+                href="/portfolio"
+                variant="secondary"
+                size="lg"
+                className="border-0 bg-white/10 text-white backdrop-blur-sm hover:bg-white/15"
+              >
                 See our work
               </Button>
             )}
