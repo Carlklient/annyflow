@@ -20,7 +20,7 @@ export function SolutionsPageContent() {
         <SectionHeading
           eyebrow="Solutions"
           title="Infrastructure for the way modern teams work"
-          description="Four tightly scoped practice areas—automation, spreadsheets, voice, and outbound—delivered with enterprise rigor."
+          description="Four tightly scoped practice areas covering automation, spreadsheets, voice, and outbound, delivered with enterprise rigor."
         />
       </div>
 

@@ -17,7 +17,7 @@ function interestLabel(interest?: string) {
     outbound: "Outbound Calling Infrastructure",
     other: "General inquiry",
   };
-  return interest ? map[interest] || interest : "—";
+  return interest ? map[interest] || interest : "N/A";
 }
 
 async function sendViaWeb3Forms(payload: InquiryPayload): Promise<NotifyResult> {
@@ -38,7 +38,7 @@ async function sendViaWeb3Forms(payload: InquiryPayload): Promise<NotifyResult> 
       from_name: "AnnyFlow Website",
       name: payload.name,
       email: payload.email,
-      company: payload.company || "—",
+      company: payload.company || "N/A",
       interest: interestLabel(payload.interest),
       message: payload.message,
       botcheck: "",
@@ -93,7 +93,7 @@ async function notifyTelegram(payload: InquiryPayload): Promise<void> {
     "🆕 AnnyFlow inquiry",
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
-    `Company: ${payload.company || "—"}`,
+    `Company: ${payload.company || "N/A"}`,
     `Interest: ${interestLabel(payload.interest)}`,
     "",
     payload.message,
@@ -125,7 +125,7 @@ async function notifyDiscord(payload: InquiryPayload): Promise<void> {
           description: payload.message.slice(0, 1800),
           color: 0x10b981,
           fields: [
-            { name: "Company", value: payload.company || "—", inline: true },
+            { name: "Company", value: payload.company || "N/A", inline: true },
             { name: "Email", value: payload.email, inline: true },
           ],
         },
@@ -147,7 +147,7 @@ async function sendViaFormSubmit(payload: InquiryPayload): Promise<NotifyResult>
     body: JSON.stringify({
       name: payload.name,
       email: payload.email,
-      company: payload.company || "—",
+      company: payload.company || "N/A",
       interest: interestLabel(payload.interest),
       message: payload.message,
       _subject: `AnnyFlow inquiry from ${payload.name}`,

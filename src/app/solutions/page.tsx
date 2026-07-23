@@ -3,11 +3,11 @@ import { SolutionsPageContent } from "@/components/solutions/SolutionsPageConten
 import { CTASection } from "@/components/home/CTASection";
 
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: "Solutions for Automation, Spreadsheets, Phones & Dialers",
   description:
-    "Business automation, spreadsheet automation, business phone systems, and outbound calling infrastructure from AnnyFlow.",
+    "AnnyFlow solutions for business automation, spreadsheet automation, business phone systems, and outbound calling infrastructure.",
   openGraph: {
-    title: "Solutions · AnnyFlow",
+    title: "Solutions | AnnyFlow",
     description:
       "Business automation, spreadsheet automation, business phone systems, and outbound calling infrastructure from AnnyFlow.",
   },

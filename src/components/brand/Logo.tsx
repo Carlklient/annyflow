@@ -103,7 +103,7 @@ function GlowingOrb({
             : { duration: 4.2, repeat: Infinity, ease: "easeInOut" }
         }
       >
-        {/* Specular highlight — orb shine */}
+        {/* Specular highlight ,  orb shine */}
         <span
           className="absolute top-[10%] left-[16%] h-[34%] w-[38%] rounded-full opacity-70"
           style={{

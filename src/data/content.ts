@@ -12,7 +12,7 @@ export const SOLUTIONS: SolutionCategory[] = [
     id: "business-automation",
     title: "Business Automation",
     description:
-      "Workflow, CRM, and AI systems businesses actually run—connected, automated, and built to scale.",
+      "Workflow, CRM, and AI systems businesses actually run: connected, automated, and built to scale.",
     href: "/solutions#business-automation",
     icon: "workflow",
     items: [
@@ -78,7 +78,7 @@ export const SOLUTIONS: SolutionCategory[] = [
     id: "spreadsheet-automation",
     title: "Spreadsheet Automation",
     description:
-      "Excel, Google Sheets, and Airtable systems that replace manual work—dashboards, formulas, scripts, and data pipelines teams rely on every day.",
+      "Excel, Google Sheets, and Airtable systems that replace manual work with dashboards, formulas, scripts, and data pipelines teams rely on every day.",
     href: "/solutions#spreadsheet-automation",
     icon: "spreadsheet",
     items: [
@@ -350,7 +350,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     pillar: "automation",
     solutionType: "workflow",
     summary:
-      "Connect tools end-to-end with Make, n8n, Zapier, and Power Automate—APIs, webhooks, and approval flows included.",
+      "Connect tools end to end with Make, n8n, Zapier, and Power Automate, including APIs, webhooks, and approval flows.",
     platforms: ["Make", "n8n", "Zapier", "Microsoft Power Automate"],
     automations: ["API Integrations", "Webhooks", "Multi-step Triggers"],
     accent: "#10B981",
@@ -784,7 +784,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     pillar: "outbound",
     solutionType: "preview-dialers",
     summary:
-      "Preview dialing for quality-first outbound teams—agents review lead context before each connect.",
+      "Preview dialing for quality first outbound teams, where agents review lead context before each connect.",
     platforms: ["Vicidial", "FreeSWITCH", "SIP"],
     automations: ["Lead Preview", "Quality Control", "Agent Review"],
     accent: "#065F46",
@@ -912,9 +912,14 @@ export const SITE_STATS = [
 
 export const FAQ_ITEMS = [
   {
+    question: "What does AnnyFlow do?",
+    answer:
+      "AnnyFlow builds business automation, spreadsheet automation, business phone systems, and outbound calling infrastructure. We connect CRMs, Excel, Google Sheets, PBX platforms, and dialers so your operations run as one system.",
+  },
+  {
     question: "How quickly can AnnyFlow start a new engagement?",
     answer:
-      "Most discovery consultations are scheduled within a few business days. Implementation timelines depend on scope, but lean automation and spreadsheet projects often launch in weeks—not months.",
+      "Most discovery consultations are scheduled within a few business days. Implementation timelines depend on scope, but lean automation and spreadsheet projects often launch in weeks, not months.",
   },
   {
     question: "Do you work with existing tools or replace everything?",
@@ -924,17 +929,22 @@ export const FAQ_ITEMS = [
   {
     question: "What does spreadsheet automation cover?",
     answer:
-      "Excel (formulas, VBA, Power Query), Google Sheets (Apps Script, dashboards), Airtable bases, reporting pipelines, and CRM-to-sheet sync—so teams stop copying data by hand.",
+      "Excel (formulas, VBA, Power Query), Google Sheets (Apps Script, dashboards), Airtable bases, reporting pipelines, and CRM to sheet sync so teams stop copying data by hand.",
   },
   {
-    question: "Can you support both cloud and on-premise phone systems?",
+    question: "Can you support both cloud and on premise phone systems?",
     answer:
-      "Yes. We design and deploy cloud PBX, on-premise Asterisk/FreePBX environments, and hybrid setups with SIP trunks, IVR, and CRM connectivity.",
+      "Yes. We design and deploy cloud PBX, on premise Asterisk and FreePBX environments, and hybrid setups with SIP trunks, IVR, and CRM connectivity.",
   },
   {
     question: "Is outbound calling infrastructure compliant and monitorable?",
     answer:
       "We build dialer stacks with call monitoring, recording where applicable, reporting, and operational controls so your teams stay accountable and measurable.",
+  },
+  {
+    question: "How do I book a free consultation with AnnyFlow?",
+    answer:
+      "Visit the Contact page at annyflow.vercel.app/contact, use the booking link, or reach out on WhatsApp, Telegram, Discord, or email. Discovery calls usually take 20 to 30 minutes.",
   },
 ];
 
@@ -958,13 +968,13 @@ export const TESTIMONIALS = [
     role: "IT Lead",
     industry: "Multi-site business",
     quote:
-      "The phone system rollout was calm and structured—queues, IVR, and CRM sync worked on day one without disrupting the team.",
+      "The phone system rollout was calm and structured. Queues, IVR, and CRM sync worked on day one without disrupting the team.",
   },
   {
     name: "Priya S.",
     role: "Finance Controller",
     industry: "Growing SaaS company",
     quote:
-      "Our Excel and Sheets reporting used to take days. AnnyFlow automated the pipelines—dashboards refresh themselves and leadership trusts the numbers.",
+      "Our Excel and Sheets reporting used to take days. AnnyFlow automated the pipelines so dashboards refresh themselves and leadership trusts the numbers.",
   },
 ];

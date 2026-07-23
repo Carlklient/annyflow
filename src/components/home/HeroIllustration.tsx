@@ -10,7 +10,7 @@ const CARDS = [
     src: "/images/hero/phone.png",
     alt: "Business VoIP telephone",
     title: "Business Phone",
-    detail: "IVR · Queues · CRM sync",
+    detail: "IVR, Queues, CRM sync",
     icon: Phone,
     className:
       "left-0 top-[8%] w-[42%] sm:w-[34%] lg:left-[2%] lg:top-[12%] lg:w-[26%]",
@@ -21,7 +21,7 @@ const CARDS = [
     src: "/images/hero/spreadsheet.png",
     alt: "Spreadsheet dashboard on laptop",
     title: "Spreadsheets",
-    detail: "Excel · Sheets · Live reports",
+    detail: "Excel, Sheets, Live reports",
     icon: FileSpreadsheet,
     className:
       "right-0 top-[4%] w-[42%] sm:w-[34%] lg:right-[2%] lg:top-[8%] lg:w-[26%]",
@@ -32,7 +32,7 @@ const CARDS = [
     src: "/images/hero/dialer.png",
     alt: "Outbound dialer on smartphone",
     title: "Outbound Dialer",
-    detail: "Predictive · Progressive · AI",
+    detail: "Predictive, Progressive, AI",
     icon: PhoneCall,
     className:
       "bottom-[2%] right-[4%] w-[40%] sm:w-[32%] lg:bottom-[6%] lg:right-[6%] lg:w-[24%]",
@@ -61,7 +61,7 @@ function DialerOverlay() {
       </p>
       {phase === 2 ? (
         <p className="mt-1 text-[8px] font-medium text-muted">
-          Lead scored · CRM updated
+          Lead scored, CRM updated
         </p>
       ) : (
         <p className="mt-1 text-[8px] font-medium text-muted">Updating CRM…</p>
@@ -117,32 +117,7 @@ export function HeroIllustration() {
 
       <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
         <div className="relative mx-auto aspect-[16/11] w-full max-w-5xl sm:aspect-[16/10]">
-          <svg
-            className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
-            viewBox="0 0 1000 620"
-            fill="none"
-            aria-hidden
-          >
-            {[
-              "M180 160 C 320 120, 400 200, 500 280",
-              "M820 140 C 700 160, 620 220, 540 300",
-              "M780 480 C 680 420, 600 380, 540 340",
-              "M220 420 C 340 400, 420 360, 500 320",
-            ].map((d, i) => (
-              <path
-                key={i}
-                d={d}
-                stroke="#10B981"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                opacity={0.55}
-                className="hero-dash-flow"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
-            ))}
-          </svg>
-
-          {/* Center scene — already visible, always drifting */}
+          {/* Center scene: already visible, always drifting */}
           <div className="absolute top-[18%] left-1/2 z-[2] w-[88%] max-w-[720px] -translate-x-1/2 sm:top-[16%] sm:w-[72%]">
             <div className="hero-drift-center">
               <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-white shadow-[0_24px_80px_rgba(17,24,39,0.12)] sm:rounded-[1.75rem]">
@@ -169,14 +144,14 @@ export function HeroIllustration() {
                           Call center live
                         </p>
                         <p className="text-[10px] text-muted sm:text-xs">
-                          Agents · CRM · Real-time dashboard
+                          Agents, CRM, Real time dashboard
                         </p>
                       </div>
                     </div>
                   </div>
                   <div className="inline-flex items-center gap-2 self-start rounded-full bg-dark px-3 py-1.5 text-[10px] font-semibold text-white sm:self-auto sm:text-xs">
                     <span className="hero-live-dot size-1.5 rounded-full bg-primary" />
-                    42 active lines · syncing
+                    42 active lines syncing
                   </div>
                 </div>
               </div>
@@ -228,16 +203,16 @@ export function HeroIllustration() {
 
           <div className="hero-drift-a absolute bottom-[18%] left-[2%] z-[5] hidden rounded-full border border-border bg-white px-3 py-1.5 text-[11px] font-semibold text-dark shadow-soft sm:block lg:bottom-[22%] lg:left-[8%]">
             <span className="hero-live-dot mr-1.5 inline-block size-1.5 rounded-full bg-primary" />
-            Sheet → CRM auto-sync
+            Sheet to CRM auto sync
           </div>
           <div className="hero-drift-b absolute top-[42%] right-0 z-[5] hidden rounded-full border border-border bg-white px-3 py-1.5 text-[11px] font-semibold text-dark shadow-soft lg:right-[4%] lg:block">
             <span className="hero-live-dot mr-1.5 inline-block size-1.5 rounded-full bg-accent" />
-            Dialer ↔ Phone queue
+            Dialer and Phone queue
           </div>
         </div>
 
         <p className="mt-8 text-center text-sm text-muted">
-          Phones, spreadsheets, call centers, and dialers—connected in one live operation.
+          Phones, spreadsheets, call centers, and dialers connected in one live operation.
         </p>
       </div>
     </div>

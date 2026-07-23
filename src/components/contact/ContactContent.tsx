@@ -52,7 +52,7 @@ export function ContactContent() {
 
     let delivered = false;
 
-    // 1) Silent Web3Forms (browser) — no page open
+    // 1) Silent Web3Forms (browser) ,  no page open
     try {
       const w3 = await sendViaWeb3FormsClient(payload);
       if (w3.ok) delivered = true;
@@ -116,7 +116,7 @@ export function ContactContent() {
         <SectionHeading
           eyebrow="Contact"
           title="Let's build your next system"
-          description="Share a bit about your stack and goals—we'll respond with a clear next step."
+          description="Share a bit about your stack and goals. We will respond with a clear next step."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-5">
@@ -130,7 +130,7 @@ export function ContactContent() {
                 >
                   <CheckCircle2 className="size-12 text-primary" />
                   <h2 className="mt-4 font-display text-2xl font-semibold text-dark">
-                    Message sent — here&apos;s what happens next
+                    Message sent. Here&apos;s what happens next
                   </h2>
                   <ol className="mt-4 max-w-md space-y-2 text-left text-sm text-muted">
                     <li>
@@ -316,13 +316,13 @@ export function ContactContent() {
                 Book a discovery call
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                We work remote-first with clients worldwide. Choose a time that
-                fits — on-site visits are available on request.
+                We work remote first with clients worldwide. Choose a time that
+                fits. On site visits are available on request.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-dark">
                 <li className="flex items-start gap-2">
                   <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
-                  <span>Online meetings · flexible time zones</span>
+                  <span>Online meetings across flexible time zones</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
@@ -376,7 +376,7 @@ export function ContactContent() {
                         }}
                         className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left text-sm font-medium transition-colors hover:border-primary/40 hover:bg-primary/10"
                       >
-                        Discord · {c.copyValue}
+                        Discord: {c.copyValue}
                       </button>
                     ) : (
                       <a
@@ -387,8 +387,8 @@ export function ContactContent() {
                         className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-primary/10"
                       >
                         {c.label}
-                        {c.id === "telegram" ? ` · @${SITE.telegram}` : ""}
-                        {c.id === "email" ? ` · ${SITE.email}` : ""}
+                        {c.id === "telegram" ? ` (@${SITE.telegram})` : ""}
+                        {c.id === "email" ? ` (${SITE.email})` : ""}
                       </a>
                     )
                   )}

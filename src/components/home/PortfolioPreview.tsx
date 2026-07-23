@@ -19,7 +19,7 @@ export function PortfolioPreview() {
             align="left"
             eyebrow="Portfolio"
             title="Featured solutions that ship"
-            description="Automation, spreadsheets, phone systems, and outbound—real platforms built for how modern businesses operate."
+            description="Automation, spreadsheets, phone systems, and outbound: real platforms built for how modern businesses operate."
             className="md:max-w-xl"
           />
           <Button href="/portfolio" variant="secondary">

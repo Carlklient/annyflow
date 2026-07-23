@@ -20,7 +20,7 @@ export function SolutionsPreview() {
         <SectionHeading
           eyebrow="Solutions"
           title="Four pillars of modern operations"
-          description="Automation, spreadsheets, voice, and outbound—built to remove manual work and scale cleanly."
+          description="Automation, spreadsheets, voice, and outbound built to remove manual work and scale cleanly."
         />
 
         <Stagger className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>

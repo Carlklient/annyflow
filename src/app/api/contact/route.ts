@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
     const payload = { name, email, company, interest, message };
 
-    // Email already sent from the browser — only fire Telegram/Discord
+    // Email already sent from the browser ,  only fire Telegram/Discord
     if (alertsOnly) {
       await notifyLeadAlerts(payload);
       return NextResponse.json({ ok: true, alerts: true });

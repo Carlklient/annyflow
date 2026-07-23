@@ -4,9 +4,9 @@
  */
 export const SITE = {
   name: "AnnyFlow",
-  tagline: "Business Automation · Spreadsheets · Phone Systems · Outbound Calling",
+  tagline: "Business Automation, Spreadsheets, Phone Systems, Outbound Calling",
   description:
-    "AnnyFlow builds enterprise-grade business automation, spreadsheet systems, business phone systems, and outbound calling infrastructure for modern companies.",
+    "AnnyFlow builds business automation, spreadsheet systems, business phone systems, and outbound calling infrastructure. Connect CRMs, Excel, Google Sheets, 3CX, Vicidial, and dialers so your company runs as one operation.",
   url: (() => {
     const fallback = "https://annyflow.vercel.app";
     const raw = (process.env.NEXT_PUBLIC_SITE_URL || fallback).trim();
@@ -17,7 +17,7 @@ export const SITE = {
     }
   })(),
   email: process.env.NEXT_PUBLIC_EMAIL || "mercyanny2020@gmail.com",
-  /** Digits only, country code included — from https://wa.me/13869659310 */
+  /** Digits only, country code included. Source: https://wa.me/13869659310 */
   whatsappNumber: (process.env.NEXT_PUBLIC_WHATSAPP || "13869659310").replace(
     /\D/g,
     ""
@@ -63,7 +63,7 @@ function buildChannels(): ContactChannel[] {
       id: "whatsapp",
       label: "WhatsApp",
       href: `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(
-        "Hi AnnyFlow — I'd like to book a consultation."
+        "Hi AnnyFlow, I'd like to book a consultation."
       )}`,
       color: "#25D366",
     });
@@ -82,7 +82,7 @@ function buildChannels(): ContactChannel[] {
     channels.push({
       id: "discord",
       label: "Discord",
-      // Discord has no public profile URL for usernames — copy + open Discord app
+      // Discord has no public profile URL for usernames ,  copy + open Discord app
       href: "https://discord.com/app",
       copyValue: SITE.discordUsername,
       color: "#5865F2",

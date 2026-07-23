@@ -37,8 +37,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.16, ease: EASE }}
           className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
         >
-          Automation, spreadsheets, phone systems, and outbound infrastructure—
-          designed so your business runs as one connected operation.
+          Automation, spreadsheets, phone systems, and outbound infrastructure designed so your business runs as one connected operation.
         </motion.p>
 
         <motion.div

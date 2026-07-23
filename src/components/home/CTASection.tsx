@@ -35,8 +35,7 @@ export function CTASection() {
             Book a free discovery call
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/60">
-            In 20–30 minutes we map your bottlenecks and recommend one clear path—
-            automation, phone systems, or outbound infrastructure. No obligation.
+            In 20 to 30 minutes we map your bottlenecks and recommend one clear path: automation, phone systems, or outbound infrastructure. No obligation.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {bookingUrl ? (

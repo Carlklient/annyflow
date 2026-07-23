@@ -156,12 +156,6 @@ body {
   }
 }
 
-@keyframes hero-dash-flow {
-  to {
-    stroke-dashoffset: -48;
-  }
-}
-
 @keyframes hero-bar-pulse {
   0%,
   100% {
@@ -198,11 +192,6 @@ body {
 
 .hero-drift-center {
   animation: hero-drift-center 9s ease-in-out infinite;
-}
-
-.hero-dash-flow {
-  stroke-dasharray: 10 14;
-  animation: hero-dash-flow 2.2s linear infinite;
 }
 
 .hero-live-dot {
@@ -312,7 +301,6 @@ body {
   .hero-drift-b,
   .hero-drift-c,
   .hero-drift-center,
-  .hero-dash-flow,
   .hero-live-dot,
   .portfolio-shine::after {
     animation: none !important;

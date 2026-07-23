@@ -32,7 +32,7 @@ export function AboutContent() {
 
         {/* Equal-height two columns */}
         <div className="grid items-stretch gap-8 lg:grid-cols-2 lg:gap-12">
-          {/* Left — portrait */}
+          {/* Left ,  portrait */}
           <FadeIn direction="right" className="h-full min-h-[320px] sm:min-h-[400px] lg:min-h-0">
             <div className="relative aspect-[4/5] h-auto min-h-[320px] overflow-hidden rounded-[1.75rem] shadow-lift sm:aspect-auto sm:min-h-[400px] lg:h-full lg:min-h-full">
               <Image
@@ -50,7 +50,7 @@ export function AboutContent() {
             </div>
           </FadeIn>
 
-          {/* Right — story */}
+          {/* Right ,  story */}
           <FadeIn direction="left" className="h-full">
             <div className="flex h-full flex-col rounded-[1.75rem] border border-border bg-white p-7 shadow-soft sm:p-9 lg:p-10">
               <motion.h2
@@ -65,7 +65,7 @@ export function AboutContent() {
 
               <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted sm:text-base">
                 <p>
-                  I&apos;m the Founder of AnnyFlow—an automation and communications company built
+                  I&apos;m the Founder of AnnyFlow, an automation and communications company built
                   to help modern businesses operate with clarity, speed, and control.
                 </p>
                 <p>
@@ -76,8 +76,7 @@ export function AboutContent() {
                   modern technology.
                 </p>
                 <p>
-                  Today, AnnyFlow partners with teams that need systems that actually scale—
-                  without adding more complexity.
+                  Today, AnnyFlow partners with teams that need systems that actually scale without adding more complexity.
                 </p>
               </div>
 

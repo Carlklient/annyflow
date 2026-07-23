@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SocialRail } from "@/components/layout/SocialRail";
 import { Preloader } from "@/components/brand/Preloader";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/constants";
 import "@fontsource-variable/outfit";
 import "@fontsource-variable/sora";
@@ -14,8 +15,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Automation, Spreadsheets & Calling Infrastructure`,
-    template: `%s · ${SITE.name}`,
+    default: `${SITE.name}: Business Automation, Spreadsheets, Phone Systems & Outbound Calling`,
+    template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   icons: {
@@ -37,29 +38,41 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   keywords: [
+    "AnnyFlow",
     "business automation",
+    "spreadsheet automation",
+    "Excel automation",
+    "Google Sheets automation",
     "CRM automation",
-    "3CX",
-    "Vicidial",
+    "workflow automation",
     "n8n",
     "Zapier",
-    "PBX",
+    "Make.com",
+    "business phone system",
+    "3CX",
+    "FreePBX",
+    "Asterisk PBX",
+    "SIP trunks",
+    "IVR",
     "outbound dialer",
-    "AnnyFlow",
+    "Vicidial",
+    "predictive dialer",
+    "call center infrastructure",
   ],
-  authors: [{ name: SITE.name }],
+  authors: [{ name: SITE.founder }, { name: SITE.name }],
   creator: SITE.name,
+  category: "Business Automation",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} — Automation, Spreadsheets & Calling Infrastructure`,
+    title: `${SITE.name}: Business Automation, Spreadsheets, Phone Systems & Outbound Calling`,
     description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — Automation, Spreadsheets & Calling Infrastructure`,
+    title: `${SITE.name}: Business Automation, Spreadsheets & Calling Infrastructure`,
     description: SITE.description,
   },
   robots: {
@@ -88,6 +101,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen font-sans antialiased">
+        <JsonLd />
         <Preloader />
         <ScrollToTop />
         <SocialRail />
