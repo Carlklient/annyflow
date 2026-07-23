@@ -3,400 +3,422 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { FileSpreadsheet, Headphones, Phone, PhoneCall } from "lucide-react";
+import {
+  FileSpreadsheet,
+  Headphones,
+  Phone,
+  PhoneCall,
+  type LucideIcon,
+} from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+const SLIDE_MS = 4200;
 
-const FLOAT_CARDS = [
+type Slide = {
+  id: string;
+  step: number;
+  title: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+  icon: LucideIcon;
+  /** Direction the phone mock enters from */
+  from: "left" | "right" | "up" | "down";
+  screen: "phone" | "sheet" | "callcenter" | "dialer";
+};
+
+const SLIDES: Slide[] = [
   {
     id: "phone",
-    src: "/images/hero/phone.png",
-    alt: "Business VoIP telephone",
-    title: "Business Phone",
-    detail: "IVR · Queues · CRM sync",
+    step: 1,
+    title: "Business phone systems",
+    body: "IVR, queues, and CRM-linked call handling—so every customer reaches the right agent.",
+    image: "/images/hero/phone.png",
+    imageAlt: "Business VoIP desk phone",
     icon: Phone,
-    className:
-      "left-0 top-[8%] w-[42%] sm:w-[34%] lg:left-[2%] lg:top-[12%] lg:w-[26%]",
-    /** Pass-On style: enter from left */
-    enter: { x: -72, y: 0 },
-    delay: 0.35,
+    from: "left",
+    screen: "phone",
   },
   {
     id: "sheets",
-    src: "/images/hero/spreadsheet.png",
-    alt: "Spreadsheet dashboard on laptop",
-    title: "Spreadsheets",
-    detail: "Excel · Sheets · Live reports",
+    step: 2,
+    title: "Spreadsheet automation",
+    body: "Excel and Google Sheets dashboards that refresh themselves—no more manual copy-paste.",
+    image: "/images/hero/spreadsheet.png",
+    imageAlt: "Laptop with spreadsheet dashboard",
     icon: FileSpreadsheet,
-    className:
-      "right-0 top-[4%] w-[42%] sm:w-[34%] lg:right-[2%] lg:top-[8%] lg:w-[26%]",
-    /** enter from right */
-    enter: { x: 72, y: 0 },
-    delay: 0.48,
+    from: "right",
+    screen: "sheet",
+  },
+  {
+    id: "callcenter",
+    step: 3,
+    title: "Call center operations",
+    body: "Live agent desktops, headsets, and real-time dashboards connected to your CRM.",
+    image: "/images/hero/scene.png",
+    imageAlt: "Call center agent with CRM dashboard",
+    icon: Headphones,
+    from: "up",
+    screen: "callcenter",
   },
   {
     id: "dialer",
-    src: "/images/hero/dialer.png",
-    alt: "Outbound dialer on smartphone",
-    title: "Outbound Dialer",
-    detail: "Predictive · Progressive · AI",
+    step: 4,
+    title: "Outbound dialing",
+    body: "Predictive and progressive dialers that update leads the moment a call connects.",
+    image: "/images/hero/dialer.png",
+    imageAlt: "Outbound dialer on smartphone",
     icon: PhoneCall,
-    className:
-      "bottom-[2%] right-[4%] w-[40%] sm:w-[32%] lg:bottom-[6%] lg:right-[6%] lg:w-[24%]",
-    /** enter from bottom */
-    enter: { x: 0, y: 64 },
-    delay: 0.62,
+    from: "down",
+    screen: "dialer",
   },
-] as const;
+];
 
-function CountUp({
-  to,
-  active,
-  suffix = "",
-}: {
-  to: number;
-  active: boolean;
-  suffix?: string;
-}) {
-  const [value, setValue] = useState(0);
+const enterOffset = {
+  left: { x: -120, y: 0 },
+  right: { x: 120, y: 0 },
+  up: { x: 0, y: -80 },
+  down: { x: 0, y: 80 },
+} as const;
 
+function PhoneLiveUI({ active }: { active: boolean }) {
+  const [lines, setLines] = useState(0);
   useEffect(() => {
     if (!active) return;
-    let frame = 0;
-    const frames = 28;
+    setLines(0);
+    let n = 0;
     const id = window.setInterval(() => {
-      frame += 1;
-      setValue(Math.round((to * frame) / frames));
-      if (frame >= frames) window.clearInterval(id);
-    }, 28);
+      n += 1;
+      setLines(Math.min(12, n));
+      if (n >= 12) window.clearInterval(id);
+    }, 80);
     return () => window.clearInterval(id);
-  }, [active, to]);
+  }, [active]);
 
   return (
-    <span>
-      {value}
-      {suffix}
-    </span>
+    <div className="flex h-full flex-col justify-between rounded-2xl bg-[#064E3B] p-4 text-white sm:p-5">
+      <div>
+        <p className="text-[10px] font-semibold tracking-wide text-primary-light uppercase">
+          Queue · Sales
+        </p>
+        <motion.p
+          key={lines}
+          className="mt-2 font-display text-3xl font-semibold"
+          initial={{ opacity: 0.4 }}
+          animate={{ opacity: 1 }}
+        >
+          {lines} waiting
+        </motion.p>
+      </div>
+      <div className="space-y-2">
+        {["IVR routing", "CRM popup", "Recording on"].map((label, i) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, x: -16 }}
+            animate={active ? { opacity: 1, x: 0 } : undefined}
+            transition={{ delay: 0.2 + i * 0.15, duration: 0.35, ease: EASE }}
+            className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-xs"
+          >
+            <span className="size-1.5 rounded-full bg-primary" />
+            {label}
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-function DialerScreenContent({ active, reduce }: { active: boolean; reduce: boolean | null }) {
-  const steps = ["Dialing…", "Connecting…", "Live call"];
-  const [step, setStep] = useState(0);
+function SheetLiveUI({ active }: { active: boolean }) {
+  return (
+    <div className="flex h-full flex-col rounded-2xl bg-white p-4 sm:p-5">
+      <p className="text-[10px] font-semibold tracking-wide text-primary uppercase">
+        Ops sheet · live
+      </p>
+      <div className="mt-3 flex flex-1 items-end gap-1.5">
+        {[42, 68, 55, 88, 72, 95, 60, 80].map((h, i) => (
+          <motion.div
+            key={i}
+            className="flex-1 rounded-t-md bg-primary"
+            initial={{ height: "8%" }}
+            animate={active ? { height: `${h}%` } : undefined}
+            transition={{ delay: 0.15 + i * 0.07, duration: 0.55, ease: EASE }}
+          />
+        ))}
+      </div>
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={active ? { opacity: 1, y: 0 } : undefined}
+        transition={{ delay: 0.7 }}
+        className="mt-3 text-xs text-muted"
+      >
+        Rows refreshed · formulas synced
+      </motion.p>
+    </div>
+  );
+}
+
+function CallLiveUI({ active }: { active: boolean }) {
+  const [agents, setAgents] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    setAgents(0);
+    let n = 0;
+    const id = window.setInterval(() => {
+      n += 3;
+      setAgents(Math.min(42, n));
+      if (n >= 42) window.clearInterval(id);
+    }, 50);
+    return () => window.clearInterval(id);
+  }, [active]);
+
+  return (
+    <div className="relative h-full overflow-hidden rounded-2xl">
+      <Image
+        src="/images/hero/scene.png"
+        alt=""
+        fill
+        className="object-cover"
+        sizes="320px"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+        <p className="text-[10px] font-semibold tracking-wide text-primary uppercase">
+          Call center
+        </p>
+        <p className="mt-1 font-display text-2xl font-semibold">
+          {agents} active lines
+        </p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={active ? { opacity: 1 } : undefined}
+          transition={{ delay: 0.5 }}
+          className="mt-1 text-xs text-white/70"
+        >
+          Headset · CRM · Live dashboard
+        </motion.p>
+      </div>
+    </div>
+  );
+}
+
+function DialerLiveUI({ active }: { active: boolean }) {
+  const phases = ["Dialing…", "Ringing…", "Connected"] as const;
+  const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    if (!active || reduce) {
-      setStep(2);
-      return;
-    }
-    setStep(0);
-    const t1 = window.setTimeout(() => setStep(1), 900);
-    const t2 = window.setTimeout(() => setStep(2), 1800);
+    if (!active) return;
+    setPhase(0);
+    const t1 = window.setTimeout(() => setPhase(1), 900);
+    const t2 = window.setTimeout(() => setPhase(2), 1800);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
     };
-  }, [active, reduce]);
+  }, [active]);
 
   return (
-    <div className="absolute inset-x-[18%] top-[16%] bottom-[22%] flex flex-col items-center justify-start rounded-[12%] bg-white/90 px-2 pt-3 text-center shadow-inner backdrop-blur-[2px] sm:inset-x-[20%] sm:top-[18%] sm:pt-4">
-      <AnimatePresence mode="wait">
+    <div className="flex h-full flex-col items-center justify-between rounded-2xl bg-[#111827] p-5 text-center text-white">
+      <div className="w-full">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={phases[phase]}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="text-sm font-semibold text-primary"
+          >
+            {phases[phase]}
+          </motion.p>
+        </AnimatePresence>
         <motion.p
-          key={steps[step]}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.28 }}
-          className="text-[9px] font-semibold text-primary sm:text-[10px]"
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={active ? { opacity: 1, scale: 1 } : undefined}
+          transition={{ delay: 0.25, duration: 0.4, ease: EASE }}
+          className="mt-3 font-display text-xl font-semibold tracking-tight"
         >
-          {steps[step]}
+          +1 (555) 128-2040
         </motion.p>
-      </AnimatePresence>
-      <motion.p
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={active ? { opacity: 1, scale: 1 } : undefined}
-        transition={{ delay: 0.35, duration: 0.4, ease: EASE }}
-        className="mt-1 font-display text-[11px] font-bold tracking-tight text-dark sm:text-xs"
-      >
-        +1 (555) 128-2040
-      </motion.p>
-      <motion.div
-        className="mt-2 h-1 w-[70%] overflow-hidden rounded-full bg-dark/10"
-        initial={{ opacity: 0 }}
-        animate={active ? { opacity: 1 } : undefined}
-      >
-        <motion.div
-          className="h-full rounded-full bg-primary"
-          initial={{ width: "0%" }}
-          animate={active ? { width: step === 2 ? "100%" : step === 1 ? "62%" : "28%" } : undefined}
-          transition={{ duration: 0.7, ease: EASE }}
-        />
-      </motion.div>
-      {step === 2 ? (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-1.5 text-[8px] font-medium text-muted sm:text-[9px]"
-        >
-          Lead scored · CRM updated
-        </motion.p>
-      ) : null}
-    </div>
-  );
-}
+        <p className="mt-1 text-xs text-white/50">Outbound · United States</p>
+      </div>
 
-function PhoneScreenContent({ active }: { active: boolean }) {
-  return (
-    <div className="pointer-events-none absolute inset-x-[38%] top-[22%] bottom-[42%] overflow-hidden rounded-sm">
-      <motion.div
-        className="flex h-full flex-col gap-1 bg-[#064E3B]/95 p-1.5"
-        initial={{ opacity: 0, y: 10 }}
-        animate={active ? { opacity: 1, y: 0 } : undefined}
-        transition={{ delay: 0.55, duration: 0.4, ease: EASE }}
-      >
-        <motion.div
-          className="h-1.5 rounded-sm bg-primary/80"
-          initial={{ width: "0%" }}
-          animate={active ? { width: "100%" } : undefined}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        />
-        <motion.p
-          className="text-[7px] font-semibold text-white/90"
-          initial={{ opacity: 0 }}
-          animate={active ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.85 }}
-        >
-          Queue: Sales
-        </motion.p>
-        <motion.p
-          className="text-[8px] font-bold text-white"
-          initial={{ opacity: 0 }}
-          animate={active ? { opacity: 1 } : undefined}
-          transition={{ delay: 1 }}
-        >
-          <CountUp to={12} active={active} suffix=" waiting" />
-        </motion.p>
-      </motion.div>
-    </div>
-  );
-}
-
-function SheetScreenContent({ active }: { active: boolean }) {
-  return (
-    <div className="pointer-events-none absolute inset-x-[14%] top-[18%] bottom-[28%] overflow-hidden rounded-md">
-      <motion.div
-        className="grid h-full grid-cols-3 gap-0.5 p-1"
-        initial={{ opacity: 0 }}
-        animate={active ? { opacity: 1 } : undefined}
-        transition={{ delay: 0.6 }}
-      >
-        {[72, 48, 91, 35, 88, 64].map((w, i) => (
-          <motion.div
-            key={i}
-            className="rounded-[2px] bg-primary/25"
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={active ? { scaleY: 1, opacity: 1 } : undefined}
-            transition={{ delay: 0.75 + i * 0.08, duration: 0.35, ease: EASE }}
-            style={{ originY: 1, height: `${40 + (w % 40)}%`, alignSelf: "end" }}
-          />
+      <div className="grid w-full max-w-[180px] grid-cols-3 gap-2">
+        {["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"].map((k, i) => (
+          <motion.span
+            key={k}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={active ? { opacity: 1, scale: 1 } : undefined}
+            transition={{ delay: 0.3 + i * 0.04, duration: 0.25 }}
+            className="flex aspect-square items-center justify-center rounded-full bg-white/10 text-sm font-medium"
+          >
+            {k}
+          </motion.span>
         ))}
+      </div>
+
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={active ? { scale: 1, opacity: 1 } : undefined}
+        transition={{ delay: 0.85, duration: 0.35, ease: EASE }}
+        className="flex size-14 items-center justify-center rounded-full bg-primary"
+      >
+        <PhoneCall className="size-6 text-white" />
       </motion.div>
     </div>
   );
 }
 
+function ScreenContent({
+  screen,
+  active,
+}: {
+  screen: Slide["screen"];
+  active: boolean;
+}) {
+  if (screen === "phone") return <PhoneLiveUI active={active} />;
+  if (screen === "sheet") return <SheetLiveUI active={active} />;
+  if (screen === "callcenter") return <CallLiveUI active={active} />;
+  return <DialerLiveUI active={active} />;
+}
+
+/**
+ * Continuous autoplay hero loop — same idea as Pass-On’s Vimeo:
+ * directional slide transitions + live content loading inside the device.
+ */
 export function HeroIllustration() {
   const reduce = useReducedMotion();
-  const [ready, setReady] = useState(false);
+  const [index, setIndex] = useState(0);
+  const slide = SLIDES[index];
+  const Icon = slide.icon;
+  const offset = enterOffset[slide.from];
 
   useEffect(() => {
-    const t = window.setTimeout(() => setReady(true), reduce ? 0 : 200);
-    return () => window.clearTimeout(t);
+    if (reduce) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % SLIDES.length);
+    }, SLIDE_MS);
+    return () => window.clearInterval(id);
   }, [reduce]);
 
   return (
-    <div className="relative w-full overflow-hidden border-t border-border bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9]">
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_20%,rgba(16,185,129,0.12),transparent_50%)]"
-        aria-hidden
-      />
+    <div className="relative w-full overflow-hidden border-t border-border bg-white">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-12 lg:gap-10 lg:px-10 lg:py-20">
+        {/* Left: step + copy (slides with each beat) */}
+        <div className="relative z-10 lg:col-span-5">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide.id + "-copy"}
+              initial={
+                reduce
+                  ? false
+                  : { opacity: 0, x: slide.from === "right" ? 40 : -40 }
+              }
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: slide.from === "right" ? -28 : 28 }}
+              transition={{ duration: 0.5, ease: EASE }}
+            >
+              <p className="font-display text-6xl font-semibold leading-none text-primary sm:text-7xl lg:text-8xl">
+                {slide.step}
+              </p>
+              <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-dark sm:text-3xl">
+                {slide.title}
+              </h2>
+              <div className="mt-4 flex items-start gap-3">
+                <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Icon className="size-5" />
+                </span>
+                <p className="text-sm leading-relaxed text-muted sm:text-base">
+                  {slide.body}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
-      <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
-        <div className="relative mx-auto aspect-[16/11] w-full max-w-5xl sm:aspect-[16/10]">
-          {/* Connection paths — draw after cards land */}
-          <svg
-            className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
-            viewBox="0 0 1000 620"
-            fill="none"
-            aria-hidden
-          >
-            {[
-              "M180 160 C 320 120, 400 200, 500 280",
-              "M820 140 C 700 160, 620 220, 540 300",
-              "M780 480 C 680 420, 600 380, 540 340",
-              "M220 420 C 340 400, 420 360, 500 320",
-            ].map((d, i) => (
-              <motion.path
-                key={d}
-                d={d}
-                stroke="#10B981"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeDasharray="6 10"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={
-                  ready
-                    ? { pathLength: 1, opacity: 0.55 }
-                    : { pathLength: 0, opacity: 0 }
-                }
-                transition={{
-                  duration: 0.9,
-                  delay: 0.95 + i * 0.12,
-                  ease: EASE,
-                }}
+          {/* Pagination dots */}
+          <div className="mt-8 flex items-center gap-2" role="tablist" aria-label="Hero slides">
+            {SLIDES.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Show ${s.title}`}
+                onClick={() => setIndex(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 focus-ring ${
+                  i === index ? "w-8 bg-dark" : "w-2.5 bg-border hover:bg-muted"
+                }`}
               />
             ))}
-          </svg>
+          </div>
+        </div>
 
-          {/* Featured call-center scene — loads from below */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.15, ease: EASE }}
-            className="absolute top-[18%] left-1/2 z-[2] w-[88%] max-w-[720px] -translate-x-1/2 sm:top-[16%] sm:w-[72%]"
-          >
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-white shadow-[0_24px_80px_rgba(17,24,39,0.12)] sm:rounded-[1.75rem]">
-              <div className="relative aspect-[16/10] w-full">
-                <Image
-                  src="/images/hero/scene.png"
-                  alt="Call center agent with CRM dashboard, headset, and phone systems connected"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 90vw, 720px"
-                  className="object-cover object-center"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark/55 via-transparent to-transparent" />
-              </div>
-
-              <div className="absolute inset-x-0 bottom-0 z-[3] flex flex-col gap-2 p-3 sm:flex-row sm:items-end sm:justify-between sm:p-5">
-                <motion.div
-                  initial={reduce ? false : { opacity: 0, x: -28 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.85, duration: 0.45, ease: EASE }}
-                  className="rounded-2xl bg-white/95 px-3.5 py-2.5 shadow-soft backdrop-blur-md sm:px-4 sm:py-3"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="flex size-8 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Headphones className="size-4" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-semibold text-dark sm:text-sm">
-                        Call center live
-                      </p>
-                      <p className="text-[10px] text-muted sm:text-xs">
-                        Agents · CRM · Real-time dashboard
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-                <motion.div
-                  initial={reduce ? false : { opacity: 0, x: 28 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.95, duration: 0.45, ease: EASE }}
-                  className="inline-flex items-center gap-2 self-start rounded-full bg-dark px-3 py-1.5 text-[10px] font-semibold text-white sm:self-auto sm:px-3.5 sm:text-xs"
-                >
-                  <span className="size-1.5 rounded-full bg-primary" />
-                  <CountUp to={42} active={ready} /> active lines · syncing
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Floating cards — directional load, no bounce loop */}
-          {FLOAT_CARDS.map((card) => {
-            const Icon = card.icon;
-            return (
+        {/* Right: device stage — continuous directional load like the Vimeo */}
+        <div className="relative lg:col-span-7">
+          <div className="relative mx-auto aspect-[10/11] w-full max-w-[380px] sm:max-w-[420px]">
+            <AnimatePresence mode="wait">
               <motion.div
-                key={card.id}
+                key={slide.id + "-device"}
                 initial={
                   reduce
                     ? false
-                    : { opacity: 0, x: card.enter.x, y: card.enter.y, scale: 0.96 }
+                    : { opacity: 0, x: offset.x, y: offset.y, scale: 0.96 }
                 }
                 animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-                transition={{ duration: 0.7, delay: card.delay, ease: EASE }}
-                className={`absolute z-[4] ${card.className}`}
+                exit={{
+                  opacity: 0,
+                  x: -offset.x * 0.35,
+                  y: -offset.y * 0.35,
+                  scale: 0.98,
+                  transition: { duration: 0.35 },
+                }}
+                transition={{ duration: 0.65, ease: EASE }}
+                className="absolute inset-0"
               >
-                <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_16px_48px_rgba(17,24,39,0.12)] sm:rounded-[1.25rem]">
-                  <div className="relative aspect-square w-full bg-[#F8FAFC]">
-                    <Image
-                      src={card.src}
-                      alt={card.alt}
-                      fill
-                      sizes="(max-width: 1024px) 40vw, 240px"
-                      className="object-cover p-2 sm:p-3"
-                    />
-                    {card.id === "dialer" ? (
-                      <DialerScreenContent active={ready} reduce={reduce} />
-                    ) : null}
-                    {card.id === "phone" ? <PhoneScreenContent active={ready} /> : null}
-                    {card.id === "sheets" ? <SheetScreenContent active={ready} /> : null}
+                {/* Device frame */}
+                <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-border bg-white shadow-[0_28px_80px_rgba(17,24,39,0.14)]">
+                  {/* Top chrome */}
+                  <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+                    <span className="size-2 rounded-full bg-[#F87171]" />
+                    <span className="size-2 rounded-full bg-accent" />
+                    <span className="size-2 rounded-full bg-primary" />
+                    <span className="ml-2 text-[10px] font-semibold tracking-wide text-muted uppercase">
+                      AnnyFlow · live
+                    </span>
                   </div>
-                  <motion.div
-                    className="border-t border-border/80 bg-white px-3 py-2.5 sm:px-3.5 sm:py-3"
-                    initial={reduce ? false : { opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: card.delay + 0.35, duration: 0.4, ease: EASE }}
-                  >
-                    <div className="flex items-start gap-2">
-                      <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <Icon className="size-3.5" />
-                      </span>
-                      <div className="min-w-0">
-                        <p className="truncate text-xs font-semibold text-dark sm:text-sm">
-                          {card.title}
-                        </p>
-                        <p className="truncate text-[10px] text-muted sm:text-[11px]">
-                          {card.detail}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
+
+                  {/* Product photo strip */}
+                  <div className="relative h-[38%] border-b border-border bg-[#F8FAFC]">
+                    <Image
+                      src={slide.image}
+                      alt={slide.imageAlt}
+                      fill
+                      sizes="420px"
+                      className="object-contain p-4"
+                      priority
+                    />
+                  </div>
+
+                  {/* Live loading UI inside “phone” */}
+                  <div className="min-h-0 flex-1 p-3 sm:p-4">
+                    <ScreenContent screen={slide.screen} active />
+                  </div>
                 </div>
               </motion.div>
-            );
-          })}
+            </AnimatePresence>
+          </div>
 
-          {/* Status chips — load left / right */}
-          <motion.div
-            initial={reduce ? false : { opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.05, duration: 0.5, ease: EASE }}
-            className="absolute bottom-[18%] left-[2%] z-[5] hidden rounded-full border border-border bg-white px-3 py-1.5 text-[11px] font-semibold text-dark shadow-soft sm:block lg:bottom-[22%] lg:left-[8%]"
-          >
-            <span className="mr-1.5 inline-block size-1.5 rounded-full bg-primary" />
-            Sheet → CRM auto-sync
-          </motion.div>
-          <motion.div
-            initial={reduce ? false : { opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.15, duration: 0.5, ease: EASE }}
-            className="absolute top-[42%] right-0 z-[5] hidden rounded-full border border-border bg-white px-3 py-1.5 text-[11px] font-semibold text-dark shadow-soft lg:right-[4%] lg:block"
-          >
-            <span className="mr-1.5 inline-block size-1.5 rounded-full bg-accent" />
-            Dialer ↔ Phone queue
-          </motion.div>
+          {/* Tiny progress bar under stage (video-like continuous feel) */}
+          {!reduce ? (
+            <div className="mx-auto mt-6 h-1 max-w-[380px] overflow-hidden rounded-full bg-border sm:max-w-[420px]">
+              <motion.div
+                key={slide.id + "-progress"}
+                className="h-full origin-left rounded-full bg-primary"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: SLIDE_MS / 1000, ease: "linear" }}
+              />
+            </div>
+          ) : null}
         </div>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.25, duration: 0.45, ease: EASE }}
-          className="mx-auto mt-8 max-w-lg text-center text-sm leading-relaxed text-muted sm:mt-10"
-        >
-          See how phones, spreadsheets, call centers, and dialers connect into one
-          AnnyFlow operation—built to feel like a product, not a patchwork.
-        </motion.p>
       </div>
     </div>
   );
