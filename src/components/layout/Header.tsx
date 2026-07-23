@@ -74,14 +74,14 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href="/contact" size="sm" variant="dark">
-            Get Started
+          <Button href="/contact" size="sm">
+            Book Consultation
           </Button>
         </div>
 
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-full border border-white/60 bg-white/70 text-dark shadow-soft backdrop-blur-md focus-ring lg:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-full border border-border bg-white/80 text-dark focus-ring lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -97,7 +97,7 @@ export function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/40 bg-white/70 backdrop-blur-xl lg:hidden"
+            className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border/60 bg-white/95 backdrop-blur-md lg:hidden"
           >
             <nav className="flex flex-col gap-1 px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]" aria-label="Mobile">
               {NAV_LINKS.map((link) => (

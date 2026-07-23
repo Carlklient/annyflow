@@ -10,16 +10,20 @@ export function CTASection() {
   const bookingUrl = SITE.bookingUrl;
 
   return (
-    <section className="bg-white px-5 py-20 sm:px-8 sm:py-28 lg:px-10">
+    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-24 lg:px-10">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] bg-dark px-8 py-16 text-center sm:px-12 sm:py-20"
+        className="relative overflow-hidden rounded-[1.75rem] bg-dark px-8 py-16 text-center sm:px-12 sm:py-20"
       >
         <div
-          className="pointer-events-none absolute left-1/2 top-0 size-64 -translate-x-1/2 rounded-full bg-primary/25 blur-3xl"
+          className="pointer-events-none absolute -top-20 left-1/4 size-64 rounded-full bg-primary/25 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 right-1/4 size-64 rounded-full bg-accent/15 blur-3xl"
           aria-hidden
         />
 
@@ -27,22 +31,22 @@ export function CTASection() {
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">
             Next step
           </p>
-          <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
             Book a free discovery call
           </h2>
-          <p className="mx-auto mt-5 max-w-lg text-base text-white/55">
-            In 20–30 minutes we map your bottlenecks and recommend one clear path.
-            No obligation.
+          <p className="mx-auto mt-4 max-w-xl text-base text-white/60">
+            In 20–30 minutes we map your bottlenecks and recommend one clear path—
+            automation, phone systems, or outbound infrastructure. No obligation.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             {bookingUrl ? (
-              <Button href={bookingUrl} external size="lg" className="min-w-[180px]">
-                Get Started
+              <Button href={bookingUrl} external size="lg">
+                Book a free call
                 <ArrowRight className="size-4" />
               </Button>
             ) : (
-              <Button href="/contact" size="lg" className="min-w-[180px]">
-                Get Started
+              <Button href="/contact" size="lg">
+                Book Consultation
                 <ArrowRight className="size-4" />
               </Button>
             )}
@@ -50,9 +54,9 @@ export function CTASection() {
               <Button
                 href={whatsapp.href}
                 external
-                variant="ghost"
+                variant="secondary"
                 size="lg"
-                className="text-white hover:bg-white/10"
+                className="border-0"
               >
                 <MessageCircle className="size-4" />
                 Chat on WhatsApp

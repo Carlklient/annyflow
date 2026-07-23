@@ -11,32 +11,18 @@ const NODES = [
   { t: "Dialer", c: "bg-dark" },
 ] as const;
 
-const FLOATS = [
-  { label: "Easy & Simple", tone: "bg-white text-dark", x: "left-[4%] top-[12%]", delay: 0 },
-  { label: "Powerful", tone: "bg-primary text-white", x: "right-[6%] top-[18%]", delay: 0.15 },
-  { label: "Precise", tone: "bg-dark text-white", x: "left-[8%] bottom-[22%]", delay: 0.25 },
-  { label: "Connected", tone: "bg-accent text-white", x: "right-[4%] bottom-[28%]", delay: 0.35 },
-] as const;
-
 export function HeroIllustration() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative mx-auto w-full">
-      {/* Soft stage glow */}
-      <div
-        className="pointer-events-none absolute inset-x-[10%] bottom-0 h-1/2 rounded-[50%] bg-primary/10 blur-3xl"
-        aria-hidden
-      />
-
+    <div className="relative mx-auto w-full pb-2">
       <motion.div
-        className="relative overflow-hidden rounded-[1.75rem] border border-border/60 bg-[#F8FAFC] shadow-[0_24px_80px_rgba(17,24,39,0.08)] sm:rounded-[2rem]"
-        initial={reduce ? false : { opacity: 0, y: 24 }}
+        className="relative overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-lift sm:rounded-[2rem]"
+        initial={reduce ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+        transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
       >
-        {/* Clean top bar */}
-        <div className="flex items-center gap-2 border-b border-border/70 bg-white px-5 py-3.5">
+        <div className="flex items-center gap-2 border-b border-border bg-background px-5 py-3.5">
           <span className="size-2.5 rounded-full bg-[#F87171]" />
           <span className="size-2.5 rounded-full bg-accent" />
           <span className="size-2.5 rounded-full bg-primary" />
@@ -50,7 +36,6 @@ export function HeroIllustration() {
         </div>
 
         <div className="grid gap-4 p-4 sm:grid-cols-12 sm:gap-5 sm:p-6 lg:p-8">
-          {/* Sidebar */}
           <div className="hidden flex-col gap-2 rounded-2xl bg-dark p-4 text-white sm:col-span-3 sm:flex">
             {["Automations", "Phone", "Outbound", "Reports"].map((item, i) => (
               <div
@@ -74,7 +59,6 @@ export function HeroIllustration() {
             </div>
           </div>
 
-          {/* Main */}
           <div className="flex flex-col gap-4 sm:col-span-9">
             <div className="grid grid-cols-3 gap-3">
               {[
@@ -84,7 +68,7 @@ export function HeroIllustration() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-border/80 bg-white p-3 sm:p-4"
+                  className="rounded-2xl border border-border bg-background p-3 sm:p-4"
                 >
                   <p className="text-[10px] font-medium tracking-wide text-muted uppercase">
                     {stat.label}
@@ -96,7 +80,7 @@ export function HeroIllustration() {
               ))}
             </div>
 
-            <div className="relative flex-1 overflow-hidden rounded-2xl border border-border/80 bg-white p-4 sm:p-5">
+            <div className="relative flex-1 overflow-hidden rounded-2xl border border-border bg-background p-4 sm:p-5">
               <p className="mb-4 text-[10px] font-semibold tracking-wide text-muted uppercase">
                 Live workflow
               </p>
@@ -106,12 +90,10 @@ export function HeroIllustration() {
                     <motion.div
                       className={`flex size-12 items-center justify-center rounded-2xl text-xs font-semibold text-white shadow-soft sm:size-14 sm:text-sm ${node.c}`}
                       animate={
-                        reduce
-                          ? undefined
-                          : { y: [0, i % 2 === 0 ? -8 : 8, 0] }
+                        reduce ? undefined : { y: [0, i % 2 === 0 ? -6 : 6, 0] }
                       }
                       transition={{
-                        duration: 3.6 + i * 0.25,
+                        duration: 3.8 + i * 0.25,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -139,7 +121,7 @@ export function HeroIllustration() {
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3">
-                <div className="rounded-xl bg-[#F8FAFC] p-3">
+                <div className="rounded-xl border border-border bg-white p-3">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-[10px] font-medium text-muted">Call Queue</span>
                     <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-semibold text-primary">
@@ -159,7 +141,7 @@ export function HeroIllustration() {
                     ))}
                   </div>
                 </div>
-                <div className="rounded-xl bg-[#F8FAFC] p-3">
+                <div className="rounded-xl border border-border bg-white p-3">
                   <span className="text-[10px] font-medium text-muted">AI Receptionist</span>
                   <div className="mt-3 flex h-11 items-end gap-1">
                     {[4, 7, 5, 9, 6, 8, 4, 7, 10, 5].map((h, i) => (
@@ -187,31 +169,6 @@ export function HeroIllustration() {
           </div>
         </div>
       </motion.div>
-
-      {/* Floating capability labels — light, like uMake chips */}
-      {FLOATS.map((chip) => (
-        <motion.div
-          key={chip.label}
-          className={`absolute hidden rounded-full px-3.5 py-2 text-xs font-semibold shadow-lift sm:block ${chip.x} ${chip.tone}`}
-          initial={reduce ? false : { opacity: 0, y: 10 }}
-          animate={
-            reduce
-              ? { opacity: 1 }
-              : { opacity: 1, y: [0, -5, 0] }
-          }
-          transition={{
-            opacity: { delay: 0.7 + chip.delay, duration: 0.45 },
-            y: {
-              delay: 1 + chip.delay,
-              duration: 4.5 + chip.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-        >
-          {chip.label}
-        </motion.div>
-      ))}
     </div>
   );
 }

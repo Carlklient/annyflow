@@ -9,8 +9,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-24 overflow-hidden border-t border-white/10 bg-dark text-white">
-      <div className="pointer-events-none absolute inset-0 prism-mesh-dark opacity-60" aria-hidden />
+    <footer className="relative mt-24 border-t border-white/10 bg-dark text-white">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
         aria-hidden
